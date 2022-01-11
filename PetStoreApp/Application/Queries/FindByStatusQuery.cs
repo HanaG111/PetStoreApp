@@ -3,9 +3,7 @@ using MediatR;
 
 namespace PetStoreApp.Application.Queries;
 
-public class FindByIdQuery : IRequest<PetModel>
+public class FindByStatusQuery : IRequest<PetModel>
 {
-    public int PetId { get; set; }
+    public int Status { get; set; }
 }
-
-

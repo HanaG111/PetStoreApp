@@ -8,6 +8,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
+using PetStoreApp.Application.Configuration;
+using PetStoreApp.Infrastructure.Context;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+
+
 
 
 namespace PetStoreApp
@@ -24,9 +36,13 @@ namespace PetStoreApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            // services.AddDbContext<PetStoreDbContext>(options =>
+            // {
+            //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            // });
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
-           
+            services.ResolveDependencies();
             services.AddSingleton<IDataAccess, DataAccess>();
            
         }
@@ -40,7 +56,7 @@ namespace PetStoreApp
             }
 
             app.UseRouting();
-            
+            app.UseHttpsRedirection();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

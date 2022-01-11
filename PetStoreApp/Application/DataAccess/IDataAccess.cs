@@ -1,4 +1,4 @@
-﻿using PetStoreApp.Application.Models;
+﻿using PetStoreApp.Domain.Models;
 using PetStoreApp.Application.DataAccess;
 
 namespace PetStoreApp.Application.DataAccess

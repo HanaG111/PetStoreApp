@@ -1,6 +1,6 @@
 ﻿using PetStoreApp.Application.Commands;
 using PetStoreApp.Application.DataAccess;
-using PetStoreApp.Application.Models;
+using PetStoreApp.Domain.Models;
 using MediatR;
 using PetStoreApp.Application.Handlers;
 

@@ -1,12 +1,6 @@
-﻿using PetStoreApp.Application.Models;
+﻿using PetStoreApp.Domain.Models;
 using PetStoreApp.Application.Queries;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace PetStoreApp.Application.Handlers;
 

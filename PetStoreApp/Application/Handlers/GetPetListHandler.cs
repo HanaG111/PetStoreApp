@@ -1,5 +1,5 @@
 ﻿using PetStoreApp.Application.DataAccess;
-using PetStoreApp.Application.Models;
+using PetStoreApp.Domain.Models;
 using PetStoreApp.Application.Queries;
 using MediatR;
 
