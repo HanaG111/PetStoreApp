@@ -1,5 +1,5 @@
-bin/
-obj/
+bin/Debug/net6.0
+obj/Debug/net6.0
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
