@@ -1,26 +1,6 @@
-﻿using PetStoreApp.Presentation.Controllers;
-using PetStoreApp.Application.DataAccess;
+﻿using System.Reflection;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using AutoMapper;
-using PetStoreApp.Application.Configuration;
-using PetStoreApp.Infrastructure.Context;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-
-
-
+using PetStoreApp.Application.DataAccess;
 
 namespace PetStoreApp
 {
@@ -42,9 +22,9 @@ namespace PetStoreApp
             // });
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
-            services.ResolveDependencies();
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddSingleton<IDataAccess, DataAccess>();
-           
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,5 +5,5 @@ namespace PetStoreApp.Application.Queries;
 
 public class FindByStatusQuery : IRequest<PetModel>
 {
-    public int Status { get; set; }
+    public string Status { get; set; }
 }

@@ -3,7 +3,6 @@ using PetStoreApp.Domain.Models;
 using PetStoreApp.Application.Queries;
 using MediatR;
 
-
 namespace PetStoreApp.Application.Handlers;
 
 public class GetPetListHandler : IRequestHandler<GetPetListQuery, List<PetModel>>

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using PetStoreApp.Domain.Models;
-using PetStoreApp.Domain.Services;
+﻿using PetStoreApp.Domain.Models;
 using PetStoreApp.Presentation.Controllers;
 
 namespace PetStoreApp.Domain.Interfaces;
