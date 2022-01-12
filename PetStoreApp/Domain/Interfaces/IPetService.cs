@@ -4,7 +4,7 @@ namespace PetStoreApp.Domain.Interfaces;
 
 public interface IPetService : IDisposable
 {
-    Task<IEnumerable<Pet>> GetPets();
+    Task<Pet> GetPets();
     Task<Pet> FindById(int petId);
     Task<Pet> FindByStatus(string status);
     Task<Pet> AddPet(Pet petModel);

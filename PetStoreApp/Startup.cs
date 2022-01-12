@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using MediatR;
-using PetStoreApp.Application.DataAccess;
+using PetStoreApp.Application.Pets.DataAccess;
+using PetStoreApp.Application.Pets.DataAccess;
 
 namespace PetStoreApp
 {

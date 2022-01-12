@@ -1,4 +1,4 @@
-﻿using PetStoreApp.Application.DataAccess;
+﻿using PetStoreApp.Application.Pets.DataAccess;
 using System.ComponentModel.DataAnnotations;
 
 namespace PetStoreApp.Infrastructure.Dtos;

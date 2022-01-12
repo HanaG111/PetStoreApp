@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using PetStoreApp.Domain.Models;
 
-namespace PetStoreApp.Application.Commands;
+namespace PetStoreApp.Application.Pets.Commands;
 
 public class EditPetCommand : IRequest<PetModel>
 {

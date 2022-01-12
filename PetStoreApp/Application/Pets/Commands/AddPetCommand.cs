@@ -1,8 +1,7 @@
 ﻿using PetStoreApp.Domain.Models;
 using MediatR;
 
-namespace PetStoreApp.Application.Commands;
-
+namespace PetStoreApp.Application.Pets.Commands;
 public class AddPetCommand : IRequest<PetModel>
 {
     public string PetName { get; set; }

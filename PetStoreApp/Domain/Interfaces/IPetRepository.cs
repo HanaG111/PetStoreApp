@@ -7,5 +7,5 @@ public interface IPetRepository : IRepository<PetModel>
 {
     new Task<List<Pet>> GetPets();
     new Task<Pet> FindById(int petId);
-    new Task<IEnumerable<Pet>> FindByStatus(string status);
+    new Task<Pet> FindByStatus(string status);
 }

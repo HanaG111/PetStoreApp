@@ -1,9 +1,8 @@
-﻿using PetStoreApp.Application.DataAccess;
+﻿using PetStoreApp.Application.Pets.DataAccess;
 using PetStoreApp.Domain.Models;
-using PetStoreApp.Application.Queries;
 using MediatR;
 
-namespace PetStoreApp.Application.Handlers;
+namespace PetStoreApp.Application.Pets.Queries;
 
 public class GetPetListHandler : IRequestHandler<GetPetListQuery, List<PetModel>>
 {

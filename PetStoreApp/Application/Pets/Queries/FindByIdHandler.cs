@@ -1,9 +1,8 @@
 ﻿using PetStoreApp.Domain.Models;
-using PetStoreApp.Application.Queries;
 using MediatR;
-using PetStoreApp.Application.DataAccess;
+using PetStoreApp.Application.Pets.DataAccess;
 
-namespace PetStoreApp.Application.Handlers;
+namespace PetStoreApp.Application.Pets.Queries;
 
 public class FindByIdHandler : IRequestHandler<FindByIdQuery, PetModel>
 {
