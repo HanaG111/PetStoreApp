@@ -6,16 +6,16 @@ namespace PetStoreApp.Application.Pets.Queries;
 
 public class GetPetListHandler : IRequestHandler<GetPetListQuery, List<PetModel>>
 {
-    private readonly IDataAccess _data;
+    private readonly IDataAccess _dataAccess;
 
-    public GetPetListHandler(IDataAccess data)
+    public GetPetListHandler(IDataAccess dataAccess)
     {
-        _data = data;
+        _dataAccess = dataAccess;
     }
 
     public Task<List<PetModel>> Handle(GetPetListQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_data.GetPets());
+        return Task.FromResult(_dataAccess.GetPets());
     }
 }
 

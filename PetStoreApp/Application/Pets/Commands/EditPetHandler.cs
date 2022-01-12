@@ -6,15 +6,21 @@
 
  public class EditPetHandler : IRequestHandler<EditPetCommand, PetModel>
  {
-     private readonly IDataAccess _data;
+     private readonly IDataAccess _dataAccess;
 
-     public EditPetHandler(IDataAccess data)
+     public EditPetHandler(IDataAccess dataAccess)
      {
-         _data = data;
+         _dataAccess = dataAccess;
      }
      public Task<PetModel> Handle(EditPetCommand request, CancellationToken cancellationToken)
      {
-         return Task.FromResult(_data.EditPet(request.PetName, request.Category, request.Status));
+         var pet = _dataAccess.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
+
+         if (pet.PetId != request.PetId)
+         {
+             throw new ApplicationException("No Pet");
+         }
+         return Task.FromResult(_dataAccess.EditPet(request.PetName, request.Category, request.Status));
      }
-     
+
  }

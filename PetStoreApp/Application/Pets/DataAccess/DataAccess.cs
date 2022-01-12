@@ -15,24 +15,20 @@ public class DataAccess : IDataAccess
     }
     public PetModel AddPet(string petName, string category, string status)
     {
-        PetModel p = new PetModel
+        PetModel p = new()
         {
+            PetId = _pet.Max(x => x.PetId) + 1,
             PetName = petName,
             Category = category,
-            Status = status,
-            PetId = _pet.Max(x => x.PetId) + 1,
+            Status = status
         };
-        _pet.Add(p);
         return p;
     }
-    public PetModel DeletePet(int petId)
+    public PetModel DeletePet(PetModel pet)
     {
-        PetModel p = new PetModel
-        {
-            PetId = _pet.Max(x => x.PetId) - 1,
-        };
-        _pet.Remove(p);
-        return p;
+        var pets = GetPets();
+        pets.Remove(pet);
+        return pet;
     }
     public PetModel EditPet(string petName, string category, string status)
     {
@@ -41,7 +37,7 @@ public class DataAccess : IDataAccess
             PetName = petName,
             Category = category,
             Status = status,
-            PetId = _pet.Max(x => x.PetId) + 1,
+            PetId = _pet.Max(x => x.PetId),
         };
         _pet.Add(p);
         return p;

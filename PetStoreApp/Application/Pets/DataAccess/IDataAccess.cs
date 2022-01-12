@@ -6,7 +6,7 @@ namespace PetStoreApp.Application.Pets.DataAccess
     { 
         List<PetModel> GetPets();
         PetModel AddPet(string petName, string category, string status);
-        PetModel DeletePet(int petId);
+        PetModel DeletePet(PetModel pet);
         PetModel EditPet(string petName, string category, string status);
     }
 }

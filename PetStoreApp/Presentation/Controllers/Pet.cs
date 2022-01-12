@@ -55,8 +55,8 @@ public class Pet : ControllerBase
         }
     }
     
-    [HttpPost(template: "AddPet")]
-    public async Task<ActionResult<PetModel>> AddPet([FromBody] PetModel pet)
+    [HttpPost(template: "addPet")]
+    public async Task<ActionResult<PetModel>> AddPet([FromBody]PetModel pet)
     {
         try
         {
@@ -73,9 +73,9 @@ public class Pet : ControllerBase
         }
     }
 
-    [HttpDelete("deletePet/{petId}")]
+    [HttpDelete("delete/{petId}")]
 
-    public async Task<IActionResult> DeletePet([FromBody] int petId)
+    public async Task<IActionResult> DeletePet(int petId)
     {
         try
         {
@@ -89,8 +89,8 @@ public class Pet : ControllerBase
             return BadRequest(e.Message);
         }
     }
-    [HttpGet("EditPet")]
-    public async Task<IActionResult> EditPet([FromBody] string petName, string category, string status )
+    [HttpPut("editPet/{petId}")]
+    public async Task<IActionResult> EditPet(int petId, [FromBody] string petName, string category, string status )
     {
         try
         {

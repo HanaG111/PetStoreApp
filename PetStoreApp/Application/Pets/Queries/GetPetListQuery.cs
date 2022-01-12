@@ -7,5 +7,4 @@ namespace PetStoreApp.Application.Pets.Queries
     {
         
     }
-    
 }
