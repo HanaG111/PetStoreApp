@@ -32,6 +32,7 @@ public class DataAccess : IDataAccess
     }
     public PetModel EditPet(string petName, string category, string status)
     {
+        var pets = GetPets();
         PetModel p = new PetModel
         {
             PetName = petName,

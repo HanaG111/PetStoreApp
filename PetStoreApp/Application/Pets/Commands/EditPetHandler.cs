@@ -16,7 +16,7 @@
      {
          var pet = _dataAccess.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
 
-         if (pet.PetId != request.PetId)
+         if (pet == null)
          {
              throw new ApplicationException("No Pet");
          }

@@ -16,7 +16,7 @@ public class DeletePetHandler : IRequestHandler<DeletePetCommand, PetModel>
 
     public async Task<PetModel> Handle(DeletePetCommand request, CancellationToken cancellationToken)
     {
-        var pet = _dataAccess.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
+        var pet= _dataAccess.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
 
         if (pet == null)
         {
