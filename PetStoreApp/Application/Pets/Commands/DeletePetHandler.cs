@@ -2,7 +2,6 @@
 using MediatR;
 using PetStoreApp.Application.Pets.DataAccess;
 
-
 namespace PetStoreApp.Application.Pets.Commands;
 
 public class DeletePetHandler : IRequestHandler<DeletePetCommand, PetModel>
@@ -13,7 +12,6 @@ public class DeletePetHandler : IRequestHandler<DeletePetCommand, PetModel>
     {
         _dataAccess = dataAccess;
     }
-
     public async Task<PetModel> Handle(DeletePetCommand request, CancellationToken cancellationToken)
     {
         var pet= _dataAccess.GetPets().FirstOrDefault(x => x.PetId == request.PetId);

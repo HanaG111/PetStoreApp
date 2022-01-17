@@ -89,6 +89,7 @@ public class Pet : ControllerBase
             return BadRequest(e.Message);
         }
     }
+    
     [HttpPut("editPet/{petId}")]
     public async Task<IActionResult> EditPet(int petId, [FromBody] PetModel pet )
     {

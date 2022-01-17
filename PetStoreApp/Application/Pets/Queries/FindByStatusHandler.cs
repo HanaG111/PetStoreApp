@@ -7,12 +7,10 @@ namespace PetStoreApp.Application.Pets.Queries;
 public class FindByStatusHandler : IRequestHandler<FindByStatusQuery, PetModel>
 {
     private readonly IDataAccess _dataAccess;
-
     public FindByStatusHandler(IDataAccess dataAccess)
     {
         _dataAccess = dataAccess;
     }
-
     public async Task<PetModel> Handle(FindByStatusQuery request, CancellationToken cancellationToken)
     {
         var pet = _dataAccess.GetPets().FirstOrDefault(x => x.Status == request.Status);

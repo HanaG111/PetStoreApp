@@ -3,7 +3,6 @@
  using PetStoreApp.Application.Pets.DataAccess;
 
  namespace PetStoreApp.Application.Pets.Commands;
-
  public class EditPetHandler : IRequestHandler<EditPetCommand, PetModel>
  {
      private readonly IDataAccess _dataAccess;

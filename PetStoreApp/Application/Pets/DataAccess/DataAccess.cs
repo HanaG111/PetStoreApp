@@ -1,10 +1,7 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using PetStoreApp.Application.Pets.Queries;
 using PetStoreApp.Application.Pets.Commands;
 using PetStoreApp.Domain.Models;
-using PetStoreApp.Infrastructure.Dtos;
-using PetStoreApp.Presentation.Controllers;
 
 namespace PetStoreApp.Application.Pets.DataAccess;
 public class DataAccess : IDataAccess
@@ -39,7 +36,6 @@ public class DataAccess : IDataAccess
           pets.Remove(pet);
           return pet;
     }
-    
     public PetModel EditPet(PetModel pet)
     {
         var existPet = _mediator.Send(new FindByIdQuery

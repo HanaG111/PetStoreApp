@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using MediatR;
 using PetStoreApp.Application.Pets.DataAccess;
-using PetStoreApp.Application.Pets.DataAccess;
 
 namespace PetStoreApp
 {
@@ -11,7 +10,6 @@ namespace PetStoreApp
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.

@@ -21,7 +21,6 @@ public class FindByIdHandler : IRequestHandler<FindByIdQuery, PetModel>
         {
             throw new ApplicationException("No Pet");
         }
-
         return await Task.FromResult(pet);
     }
 }

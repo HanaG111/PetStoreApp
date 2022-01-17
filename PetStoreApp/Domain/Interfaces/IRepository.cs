@@ -1,7 +1,6 @@
 ﻿using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Domain.Interfaces;
-
 public interface IRepository<TEntity> : IDisposable where TEntity : Entity
 {
     Task AddPet(TEntity entity);
@@ -11,6 +10,4 @@ public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     Task<TEntity>FindByStatus(string status);
     Task EditPet(TEntity entity);
     Task DeletePet(TEntity entity);
-  
-
 }

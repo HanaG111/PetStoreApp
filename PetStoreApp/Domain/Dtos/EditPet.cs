@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace PetStoreApp.Infrastructure.Dtos;
+namespace PetStoreApp.Domain.Dtos;
 
 public class EditPet
 {

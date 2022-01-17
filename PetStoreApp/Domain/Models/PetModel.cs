@@ -1,6 +1,4 @@
-﻿
-namespace PetStoreApp.Domain.Models;
-
+﻿namespace PetStoreApp.Domain.Models;
 public class PetModel : Entity
 {
     public string PetName { get; set; }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
+using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Infrastructure.Dtos;
-using PetStoreApp.Infrastructure.Dtos;
-using PetStoreApp.Domain.Models;
 using PetStoreApp.Presentation.Controllers;
 
 namespace PetStoreApp.Application.Configuration;

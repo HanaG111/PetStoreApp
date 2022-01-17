@@ -1,5 +1,4 @@
-﻿namespace PetStoreApp.Infrastructure.Dtos;
-
+﻿namespace PetStoreApp.Domain.Dtos;
 public class PetResult
 {
     public int PetId { get; set; }

@@ -1,7 +1,6 @@
 ﻿using PetStoreApp.Presentation.Controllers;
 
 namespace PetStoreApp.Domain.Interfaces;
-
 public interface IPetService : IDisposable
 {
     Task<Pet> GetPets();

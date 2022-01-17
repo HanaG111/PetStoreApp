@@ -2,7 +2,6 @@
 using PetStoreApp.Presentation.Controllers;
 
 namespace PetStoreApp.Domain.Interfaces;
-
 public interface IPetRepository : IRepository<PetModel>
 {
     new Task<List<Pet>> GetPets();
