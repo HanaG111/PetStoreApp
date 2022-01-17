@@ -12,7 +12,7 @@
      {
          _dataAccess = dataAccess;
      }
-     public Task<PetModel> Handle(EditPetCommand request, CancellationToken cancellationToken)
+     public async Task<PetModel> Handle(EditPetCommand request, CancellationToken cancellationToken)
      {
          var pet = _dataAccess.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
 
@@ -20,7 +20,7 @@
          {
              throw new ApplicationException("No Pet");
          }
-         return Task.FromResult(_dataAccess.EditPet(request.PetName, request.Category, request.Status));
+         return await Task.FromResult(_dataAccess.EditPet(request.Pet));
      }
 
  }

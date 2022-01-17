@@ -90,15 +90,14 @@ public class Pet : ControllerBase
         }
     }
     [HttpPut("editPet/{petId}")]
-    public async Task<IActionResult> EditPet(int petId, [FromBody] string petName, string category, string status )
+    public async Task<IActionResult> EditPet(int petId, [FromBody] PetModel pet )
     {
         try
         {
             return Ok(await _mediator.Send(new EditPetCommand
             {
-                PetName = petName,
-                Category = category,
-                Status = status
+                PetId = petId,
+                Pet = pet,
             }));
         }
         catch (Exception ex)

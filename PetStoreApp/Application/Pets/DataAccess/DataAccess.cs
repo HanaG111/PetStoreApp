@@ -1,8 +1,16 @@
-﻿using PetStoreApp.Domain.Models;
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using PetStoreApp.Application.Pets.Queries;
+using PetStoreApp.Application.Pets.Commands;
+using PetStoreApp.Domain.Models;
+using PetStoreApp.Infrastructure.Dtos;
+using PetStoreApp.Presentation.Controllers;
 
 namespace PetStoreApp.Application.Pets.DataAccess;
 public class DataAccess : IDataAccess
 {
+    private readonly IMediator _mediator;
+
     private readonly List<PetModel> _pet = new();
     public DataAccess()
     {
@@ -25,22 +33,63 @@ public class DataAccess : IDataAccess
         return p;
     }
     public PetModel DeletePet(PetModel pet)
+
     {
-        var pets = GetPets();
-        pets.Remove(pet);
-        return pet;
+         var pets = GetPets();
+          pets.Remove(pet);
+          return pet;
     }
-    public PetModel EditPet(string petName, string category, string status)
+    
+    public PetModel EditPet(PetModel pet)
     {
-        var pets = GetPets();
+        var existPet = _mediator.Send(new FindByIdQuery
+        {
+            PetId = pet.PetId
+        });
+
+        if (existPet == null)
+        {
+            throw new ApplicationException($"No Pet with {pet.PetId} Id");
+        }
+        
         PetModel p = new PetModel
         {
-            PetName = petName,
-            Category = category,
-            Status = status,
-            PetId = _pet.Max(x => x.PetId),
+            PetId = pet.PetId,
+            PetName = pet.Category,
+            Category = pet.Category,
+            Status = pet.Status,
         };
-        _pet.Add(p);
+
+        var result = _mediator.Send(new EditPetCommand
+        {
+            Pet = pet
+        });
+
         return p;
     }
+
+    /*
+      public PetModel EditPet(string petName, string category, string status)
+      {
+          var pets = GetPets();
+          
+          var existPet = await _mediator.Send(new FindByIdQuery
+          {
+              PetId = pet.PetId
+          });
+          
+          pets.Find( pet => pet.PetId() ==);
+         
+          PetModel p = new PetModel
+          {
+              PetName = petName,
+              Category = category,
+              Status = status,
+              PetId = _pet.Max(x => x.PetId),
+          };
+          _pet.Add(p);
+          return p;
+      }
+      }
+  */
 }
