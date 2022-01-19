@@ -10,7 +10,7 @@ public class AutomapperConfig : Profile
     public AutomapperConfig()
     {
         CreateMap<Pet, AddPetDto>().ReverseMap();
-        CreateMap<Pet, EditPet>().ReverseMap();
+        CreateMap<Pet, PetModelDto>().ReverseMap();
         CreateMap<Pet, DeletePet>().ReverseMap();
         CreateMap<Pet, PetResult>().ReverseMap();
     }

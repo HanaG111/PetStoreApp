@@ -3,6 +3,7 @@ using PetStoreApp.Domain.Models;
 using PetStoreApp.Application.Pets.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PetStoreApp.Domain.Dtos;
 
 namespace PetStoreApp.Presentation.Controllers;
 
@@ -56,15 +57,13 @@ public class Pet : ControllerBase
     }
     
     [HttpPost(template: "addPet")]
-    public async Task<ActionResult<PetModel>> AddPet([FromBody]PetModel pet)
+    public async Task<ActionResult<PetModel>> AddPet([FromBody]PetModelDto petDto)
     {
         try
         {
             return Ok(await _mediator.Send(new AddPetCommand
             {
-                PetName = pet.PetName,
-                Category = pet.Category,
-                Status = pet.Status,
+                PetDto = petDto,
             }));
         }
         catch (Exception e)
@@ -91,15 +90,15 @@ public class Pet : ControllerBase
     }
     
     [HttpPut("editPet/{petId}")]
-    public async Task<IActionResult> EditPet(int petId, [FromBody] PetModel pet )
+    public async Task<ActionResult<PetModel>> EditPet(int petId,[FromBody]PetModelDto petDto)
     {
         try
         {
             return Ok(await _mediator.Send(new EditPetCommand
-                {
-                    PetId = petId,
-                    Pet = pet,
-                }));
+            {
+            PetId = petId,
+            PetDto = petDto,
+            }));
         }
         catch (Exception ex)
         {

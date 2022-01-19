@@ -12,7 +12,7 @@ public class AddPetHandler : IRequestHandler<AddPetCommand, PetModel>
     }
     public async Task<PetModel> Handle(AddPetCommand request, CancellationToken cancellationToken)
     {
-        return await Task.FromResult(_dataAccess.AddPet(request.PetName, request.Category, request.Status));
+        return await Task.FromResult(_dataAccess.AddPet(request.PetId, request.PetDto));
     }
 }
 

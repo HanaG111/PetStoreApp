@@ -2,11 +2,8 @@
 
 namespace PetStoreApp.Domain.Dtos;
 
-public class EditPet
+public class PetModelDto
 {
-    [Key]
-    public int PetId { get; set; }
-
     [Required(ErrorMessage = "The field {0} is required")]
     public string PetName { get; set; }
 

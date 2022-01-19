@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using PetStoreApp.Application.Pets.Queries;
 using PetStoreApp.Application.Pets.Commands;
+using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Pets.DataAccess;
@@ -19,14 +19,14 @@ public class DataAccess : IDataAccess
     {
         return _pet;
     }
-    public PetModel AddPet(string petName, string category, string status)
+    public PetModel AddPet(int petId, PetModelDto petDto)
     {
         PetModel p = new()
         {
             PetId = _pet.Max(x => x.PetId) + 1,
-            PetName = petName,
-            Category = category,
-            Status = status
+            PetName = petDto.PetName,
+            Category = petDto.Category,
+            Status = petDto.Status,
         };
         return p;
     }
@@ -37,57 +37,16 @@ public class DataAccess : IDataAccess
           pets.Remove(pet);
           return pet;
     }
-    public PetModel EditPet(int petId, PetModel pet)
+    public PetModel EditPet(int petId, PetModelDto petDto)
     {
-        var existPet = _mediator.Send(new FindByIdQuery
-        {
-            PetId = pet.PetId
-        });
-
-        if (existPet == null)
-        {
-            throw new ApplicationException($"No Pet");
-        }
-        
         PetModel p = new()
         {
-            PetId = _pet.Max(x => x.PetId),
-            PetName = pet.PetName,
-            Category = pet.Category,
-            Status = pet.Status,
-        };
-
-        var result = _mediator.Send(new EditPetCommand
-        {
             PetId = petId,
-            Pet = pet
-        });
-        _pet.Add(p);
+            PetName = petDto.PetName,
+            Category = petDto.Category,
+            Status = petDto.Status,
+        };
         return p;
     }
 
-    /*
-      public PetModel EditPet(string petName, string category, string status)
-      {
-          var pets = GetPets();
-          
-          var existPet = await _mediator.Send(new FindByIdQuery
-          {
-              PetId = pet.PetId
-          });
-          
-          pets.Find( pet => pet.PetId() ==);
-         
-          PetModel p = new PetModel
-          {
-              PetName = petName,
-              Category = category,
-              Status = status,
-              PetId = _pet.Max(x => x.PetId),
-          };
-          _pet.Add(p);
-          return p;
-      }
-      }
-  */
 }
