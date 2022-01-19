@@ -13,6 +13,7 @@ public class DataAccess : IDataAccess
     {
         _pet.Add(new PetModel {PetId = 1, PetName = "Ice", Category = "Dog", Status = "Available"});
         _pet.Add(new PetModel {PetId = 2, PetName = "Donna", Category = "Cat", Status = "Pending"});
+        _pet.Add(new PetModel {PetId = 3, PetName = "Max", Category = "Dog", Status = "Available"});
     }
     public List<PetModel> GetPets()
     {
@@ -36,7 +37,7 @@ public class DataAccess : IDataAccess
           pets.Remove(pet);
           return pet;
     }
-    public PetModel EditPet(PetModel pet)
+    public PetModel EditPet(int petId, PetModel pet)
     {
         var existPet = _mediator.Send(new FindByIdQuery
         {
@@ -45,22 +46,23 @@ public class DataAccess : IDataAccess
 
         if (existPet == null)
         {
-            throw new ApplicationException($"No Pet with {pet.PetId} Id");
+            throw new ApplicationException($"No Pet");
         }
         
-        PetModel p = new PetModel
+        PetModel p = new()
         {
-            PetId = pet.PetId,
-            PetName = pet.Category,
+            PetId = _pet.Max(x => x.PetId),
+            PetName = pet.PetName,
             Category = pet.Category,
             Status = pet.Status,
         };
 
         var result = _mediator.Send(new EditPetCommand
         {
+            PetId = petId,
             Pet = pet
         });
-
+        _pet.Add(p);
         return p;
     }
 

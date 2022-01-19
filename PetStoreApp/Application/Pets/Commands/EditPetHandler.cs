@@ -6,7 +6,6 @@
  public class EditPetHandler : IRequestHandler<EditPetCommand, PetModel>
  {
      private readonly IDataAccess _dataAccess;
-
      public EditPetHandler(IDataAccess dataAccess)
      {
          _dataAccess = dataAccess;
@@ -19,7 +18,7 @@
          {
              throw new ApplicationException("No Pet");
          }
-         return await Task.FromResult(_dataAccess.EditPet(request.Pet));
+         return await Task.FromResult(_dataAccess.EditPet(request.PetId, request.Pet));
      }
 
  }

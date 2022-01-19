@@ -96,10 +96,10 @@ public class Pet : ControllerBase
         try
         {
             return Ok(await _mediator.Send(new EditPetCommand
-            {
-                PetId = petId,
-                Pet = pet,
-            }));
+                {
+                    PetId = petId,
+                    Pet = pet,
+                }));
         }
         catch (Exception ex)
         {
