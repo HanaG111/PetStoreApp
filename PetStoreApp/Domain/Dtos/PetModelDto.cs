@@ -12,5 +12,4 @@ public class PetModelDto
 
     [Required(ErrorMessage = "The field {0} is required")]
     public string Category { get; set; }
-
 }

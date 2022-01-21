@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using PetStoreApp.Application.Pets.Commands;
 using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
@@ -41,11 +40,11 @@ public class DataAccess : IDataAccess
     {
         PetModel p = new()
         {
-            PetId = petId,
             PetName = petDto.PetName,
             Category = petDto.Category,
             Status = petDto.Status,
         };
+        
         return p;
     }
 
