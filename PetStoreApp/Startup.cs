@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using MediatR;
+using Microsoft.OpenApi.Models;
 using PetStoreApp.Application.Orders.OrderService;
 using PetStoreApp.Application.Pets.DataAccess;
 
@@ -24,6 +25,10 @@ namespace PetStoreApp;
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddSingleton<IDataAccess, DataAccess>();
             services.AddSingleton<IOrderService, OrderService>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"});
+            });
             
         }
 
@@ -34,7 +39,9 @@ namespace PetStoreApp;
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseEndpoints(endpoints =>

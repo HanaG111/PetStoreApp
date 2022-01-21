@@ -7,9 +7,7 @@ using PetStoreApp.Domain.Dtos;
 
 namespace PetStoreApp.Presentation.Controllers;
 
-[Route("[controller]")]
-[ApiController]
-public class Pet : ControllerBase
+public class Pet : BaseController
 {
     private readonly IMediator _mediator;
     public Pet(IMediator mediator)

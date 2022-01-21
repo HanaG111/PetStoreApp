@@ -6,10 +6,7 @@ using PetStoreApp.Domain.Models;
 using PetStoreApp.Domain.Dtos;
 
 namespace PetStoreApp.Presentation.Controllers;
-
-[Route("[controller]")]
-[ApiController]
-public class Order : ControllerBase
+public class Order : BaseController
 {
     private readonly IMediator _mediator;
     public Order(IMediator mediator)
