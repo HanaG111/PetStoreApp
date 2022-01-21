@@ -19,6 +19,13 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, OrderModel
     
     public async Task<OrderModel> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
+        var pet = _orderService.GetOrders().FirstOrDefault(x => x.PetId == request.OrderDto.PetId);
+
+        if (pet == null)
+        {
+            throw new ApplicationException("No Pet with this Id");
+        }
+        
         return await Task.FromResult(_orderService.CreateOrder(request.OrderId, request.OrderDto));
     }
 }

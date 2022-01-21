@@ -1,7 +1,4 @@
-﻿using PetStoreApp.Domain.Dtos;
-
-namespace PetStoreApp.Domain.Models;
-
+﻿namespace PetStoreApp.Domain.Models;
 public class OrderModel : OrderEntity
 {
     public int PetId { get; set; }
