@@ -11,7 +11,7 @@ public class OrderService : IOrderService
 
     public OrderService()
     {
-        _order.Add(new OrderModel {OrderId = 1, PetId = 1, Quantity = 1, ShipDate = "10/11/2021", Status = "Available", Complete = true});
+        _order.Add(new OrderModel {OrderId = 1, PetId = 1, Quantity = 1, ShipDate = "10/11/2021", Status = "Placed", Complete = true});
     }
     public List<OrderModel> GetOrders()
     {

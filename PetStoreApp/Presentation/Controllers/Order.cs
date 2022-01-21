@@ -71,6 +71,22 @@ public class Order : ControllerBase
             return BadRequest(e.Message);
         }
     }
+    
+    [HttpGet("orderStatus/{status}")]
+    public async Task<IActionResult> FindByStatus(string status)
+    {
+        try
+        {
+            return Ok(await _mediator.Send(new FindByStatusQuery()
+            {
+                Status = status
+            }));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 }
 
 
