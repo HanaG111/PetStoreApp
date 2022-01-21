@@ -3,7 +3,6 @@ using MediatR;
 using PetStoreApp.Application.Pets.DataAccess;
 
 namespace PetStoreApp.Application.Pets.Queries;
-
 public class FindByStatusHandler : IRequestHandler<FindByStatusQuery, PetModel>
 {
     private readonly IDataAccess _dataAccess;

@@ -3,8 +3,7 @@ using MediatR;
 using PetStoreApp.Application.Orders.OrderService;
 using PetStoreApp.Application.Pets.DataAccess;
 
-namespace PetStoreApp
-{
+namespace PetStoreApp;
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -44,4 +43,3 @@ namespace PetStoreApp
             });
         }
     }
-}

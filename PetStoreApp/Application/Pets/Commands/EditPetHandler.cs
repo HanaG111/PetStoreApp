@@ -1,7 +1,6 @@
 ﻿ using MediatR;
  using PetStoreApp.Domain.Models;
  using PetStoreApp.Application.Pets.DataAccess;
- using PetStoreApp.Domain.Dtos;
 
  namespace PetStoreApp.Application.Pets.Commands;
  public class EditPetHandler : IRequestHandler<EditPetCommand, PetModel>
@@ -22,5 +21,4 @@
          
          return await Task.FromResult(_dataAccess.EditPet(request.PetId, request.PetDto));
      }
-
  }

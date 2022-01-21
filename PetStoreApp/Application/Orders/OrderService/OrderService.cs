@@ -3,7 +3,6 @@ using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Orders.OrderService;
-
 public class OrderService : IOrderService
 {
     private readonly IMediator _mediator;
@@ -30,5 +29,11 @@ public class OrderService : IOrderService
             Complete = orderDto.Complete
         };
         return o;
+    }
+    public OrderModel DeleteOrder(OrderModel order)
+    {
+        var orders = GetOrders();
+        orders.Remove(order);
+        return order;
     }
 }

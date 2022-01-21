@@ -30,7 +30,6 @@ public class DataAccess : IDataAccess
         return p;
     }
     public PetModel DeletePet(PetModel pet)
-
     {
          var pets = GetPets();
           pets.Remove(pet);
@@ -44,8 +43,6 @@ public class DataAccess : IDataAccess
             Category = petDto.Category,
             Status = petDto.Status,
         };
-        
         return p;
     }
-
 }

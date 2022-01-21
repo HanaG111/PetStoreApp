@@ -12,7 +12,6 @@ namespace PetStoreApp.Presentation.Controllers;
 public class Order : ControllerBase
 {
     private readonly IMediator _mediator;
-
     public Order(IMediator mediator)
     {
         _mediator = mediator;
@@ -40,12 +39,29 @@ public class Order : ControllerBase
             return BadRequest(e.Message);
         }
     }
+    
     [HttpGet("{orderId}")]
     public async Task<IActionResult> FindById(int orderId)
     {
         try
         {
             return Ok(await _mediator.Send(new FindByIdQuery()
+            {
+                OrderId = orderId
+            }));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
+    [HttpDelete("deleteOrder/{orderId}")]
+    public async Task<IActionResult> DeleteOrder(int orderId)
+    {
+        try
+        {
+            return Ok(await _mediator.Send(new DeleteOrderCommand()
             {
                 OrderId = orderId
             }));

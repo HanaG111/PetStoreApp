@@ -7,5 +7,4 @@ public class EditPetCommand : IRequest<PetModel>
 {
     public int PetId { get; set; }
     public PetModelDto PetDto { get; set; }
-    
 }

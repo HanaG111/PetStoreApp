@@ -6,4 +6,5 @@ public interface IOrderService
 {
     List<OrderModel> GetOrders(); 
     OrderModel CreateOrder(int orderId, OrderModelDto orderDto);
+    OrderModel DeleteOrder(OrderModel order);
 }

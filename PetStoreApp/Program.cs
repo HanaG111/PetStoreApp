@@ -1,5 +1,4 @@
-namespace PetStoreApp
-{
+namespace PetStoreApp;
     public class Program
     {
         public static void Main(string[] args)
@@ -13,5 +12,5 @@ namespace PetStoreApp
                     webBuilder.UseStartup<Startup>();
                 });
     }
-}
+
     
