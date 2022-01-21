@@ -40,6 +40,21 @@ public class Order : ControllerBase
             return BadRequest(e.Message);
         }
     }
+    [HttpGet("{orderId}")]
+    public async Task<IActionResult> FindById(int orderId)
+    {
+        try
+        {
+            return Ok(await _mediator.Send(new FindByIdQuery()
+            {
+                OrderId = orderId
+            }));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 }
 
 
