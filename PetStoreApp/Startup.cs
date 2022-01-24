@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.OpenApi.Models;
 using PetStoreApp.Application.Orders.OrderService;
 using PetStoreApp.Application.Pets.DataAccess;
+using PetStoreApp.Application.Users.UserService;
 
 namespace PetStoreApp;
     public class Startup
@@ -25,11 +26,11 @@ namespace PetStoreApp;
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddSingleton<IDataAccess, DataAccess>();
             services.AddSingleton<IOrderService, OrderService>();
+            services.AddSingleton<IUserService, UserService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"});
             });
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
