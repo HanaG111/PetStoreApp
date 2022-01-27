@@ -1,24 +1,24 @@
 ﻿using PetStoreApp.Domain.Models;
 using MediatR;
-using PetStoreApp.Application.Pets.DataAccess;
+using PetStoreApp.Application.Pets.Services;
 
 namespace PetStoreApp.Application.Pets.Commands;
-public class DeletePetHandler : IRequestHandler<DeletePetCommand, PetModel>
+public class DeletePetHandler : IRequestHandler<DeletePetCommand, Pet>
 {
-    private readonly IDataAccess _dataAccess;
-    public DeletePetHandler(IDataAccess dataAccess)
+    private readonly IPetService _petService;
+    public DeletePetHandler(IPetService petService)
     {
-        _dataAccess = dataAccess;
+        _petService = petService;
     }
-    public async Task<PetModel> Handle(DeletePetCommand request, CancellationToken cancellationToken)
+    public async Task<Pet> Handle(DeletePetCommand request, CancellationToken cancellationToken)
     {
-        var pet= _dataAccess.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
+        var pet= _petService.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
 
         if (pet == null)
         {
             throw new ApplicationException("No Pet");
         }
 
-        return await Task.FromResult(_dataAccess.DeletePet(pet));
+        return await Task.FromResult(_petService.DeletePet(pet));
     }
 }

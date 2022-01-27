@@ -5,7 +5,6 @@ namespace PetStoreApp.Presentation.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-
 public class BaseController : ControllerBase
 {
     private IMediator _mediator;

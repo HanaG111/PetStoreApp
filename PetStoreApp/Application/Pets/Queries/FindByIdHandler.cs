@@ -1,20 +1,20 @@
 ﻿using PetStoreApp.Domain.Models;
 using MediatR;
-using PetStoreApp.Application.Pets.DataAccess;
+using PetStoreApp.Application.Pets.Services;
 
 namespace PetStoreApp.Application.Pets.Queries;
-public class FindByIdHandler : IRequestHandler<FindByIdQuery, PetModel>
+public class FindByIdHandler : IRequestHandler<FindByIdQuery, Pet>
 {
-    private readonly IDataAccess _dataAccess;
+    private readonly IPetService _petService;
 
-    public FindByIdHandler(IDataAccess dataAccess)
+    public FindByIdHandler(IPetService petService)
     {
-        _dataAccess = dataAccess;
+        _petService = petService;
     }
 
-    public async Task<PetModel> Handle(FindByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Pet> Handle(FindByIdQuery request, CancellationToken cancellationToken)
     {
-        var pet = _dataAccess.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
+        var pet = _petService.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
 
         if (pet == null)
         {

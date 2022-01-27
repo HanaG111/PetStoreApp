@@ -1,5 +1,5 @@
 ﻿namespace PetStoreApp.Domain.Models;
-public class UserModel : UserEntity
+public class User : UserEntity
 {
     public string Username { get; set; }
     public string FirstName { get; set; }

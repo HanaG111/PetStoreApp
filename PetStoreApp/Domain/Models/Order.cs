@@ -1,5 +1,6 @@
 ﻿namespace PetStoreApp.Domain.Models;
-public class OrderModel : OrderEntity
+
+public class Order : OrderEntity
 {
     public int PetId { get; set; }
     public int Quantity { get; set; }

@@ -1,18 +1,18 @@
-﻿using PetStoreApp.Application.Pets.DataAccess;
+﻿using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Domain.Models;
 using MediatR;
 
 namespace PetStoreApp.Application.Pets.Queries;
-public class GetPetListHandler : IRequestHandler<GetPetListQuery, List<PetModel>>
+public class GetPetListHandler : IRequestHandler<GetPetListQuery, List<Pet>>
 {
-    private readonly IDataAccess _dataAccess;
-    public GetPetListHandler(IDataAccess dataAccess)
+    private readonly IPetService _petService;
+    public GetPetListHandler(IPetService petService)
     {
-        _dataAccess = dataAccess;
+        _petService = petService;
     }
-    public Task<List<PetModel>> Handle(GetPetListQuery request, CancellationToken cancellationToken)
+    public Task<List<Pet>> Handle(GetPetListQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_dataAccess.GetPets());
+        return Task.FromResult(_petService.GetPets());
     }
 }
 

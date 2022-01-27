@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using PetStoreApp.Application.Users.UserService;
+using PetStoreApp.Application.Users.Services;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Users.Queries;
 
-public class GetUserListHandler : IRequestHandler<GetUserListQuery, List<UserModel>>
+public class GetUserListHandler : IRequestHandler<GetUserListQuery, List<User>>
 {
     private readonly IUserService _userService;
 
@@ -12,7 +12,7 @@ public class GetUserListHandler : IRequestHandler<GetUserListQuery, List<UserMod
     {
         _userService = userService;
     }
-    public Task<List<UserModel>> Handle(GetUserListQuery request, CancellationToken cancellationToken)
+    public Task<List<User>> Handle(GetUserListQuery request, CancellationToken cancellationToken)
     {
         return Task.FromResult(_userService.GetUsers());
     }

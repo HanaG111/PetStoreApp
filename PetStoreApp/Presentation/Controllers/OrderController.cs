@@ -6,23 +6,25 @@ using PetStoreApp.Domain.Models;
 using PetStoreApp.Domain.Dtos;
 
 namespace PetStoreApp.Presentation.Controllers;
-public class Order : BaseController
+
+public class OrderController : BaseController
 {
     private readonly IMediator _mediator;
-    public Order(IMediator mediator)
+
+    public OrderController(IMediator mediator)
     {
         _mediator = mediator;
     }
-   
+
     // GET: api/<OrderController>
     [HttpGet]
-    public async Task<List<OrderModel>> Get()
+    public async Task<List<Order>> Get()
     {
         return await _mediator.Send(new GetOrderListQuery());
     }
-    
+
     [HttpPost(template: "createOrder")]
-    public async Task<ActionResult<OrderModel>> Create([FromBody]OrderModelDto orderDto)
+    public async Task<ActionResult<Order>> Create([FromBody] OrderDto orderDto)
     {
         try
         {
@@ -36,7 +38,7 @@ public class Order : BaseController
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpGet("{orderId}")]
     public async Task<IActionResult> FindById(int orderId)
     {
@@ -52,7 +54,7 @@ public class Order : BaseController
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpDelete("deleteOrder/{orderId}")]
     public async Task<IActionResult> DeleteOrder(int orderId)
     {
@@ -68,7 +70,7 @@ public class Order : BaseController
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpGet("orderStatus/{status}")]
     public async Task<IActionResult> FindByStatus(string status)
     {
@@ -85,5 +87,3 @@ public class Order : BaseController
         }
     }
 }
-
-

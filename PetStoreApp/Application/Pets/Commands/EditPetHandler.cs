@@ -1,24 +1,24 @@
 ﻿ using MediatR;
  using PetStoreApp.Domain.Models;
- using PetStoreApp.Application.Pets.DataAccess;
+ using PetStoreApp.Application.Pets.Services;
 
  namespace PetStoreApp.Application.Pets.Commands;
- public class EditPetHandler : IRequestHandler<EditPetCommand, PetModel>
+ public class EditPetHandler : IRequestHandler<EditPetCommand, Pet>
  {
-     private readonly IDataAccess _dataAccess;
-     public EditPetHandler(IDataAccess dataAccess)
+     private readonly IPetService _petService;
+     public EditPetHandler(IPetService petService)
      {
-         _dataAccess = dataAccess;
+         _petService = petService;
      }
-     public async Task<PetModel> Handle(EditPetCommand request, CancellationToken cancellationToken)
+     public async Task<Pet> Handle(EditPetCommand request, CancellationToken cancellationToken)
      {
-         var pet = _dataAccess.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
+         var pet = _petService.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
 
          if (pet == null)
          {
              throw new ApplicationException("No Pet");
          }
          
-         return await Task.FromResult(_dataAccess.EditPet(request.PetId, request.PetDto));
+         return await Task.FromResult(_petService.EditPet(request.PetId, request.PetDto));
      }
  }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace PetStoreApp.Domain.Dtos;
-public class UserModelDto
+public class UserDto
 {
     [Required(ErrorMessage = "The field {0} is required")]
     [StringLength(50)]

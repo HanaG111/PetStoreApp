@@ -7,17 +7,18 @@ using PetStoreApp.Domain.Dtos;
 
 namespace PetStoreApp.Presentation.Controllers;
 
-public class Pet : BaseController
+public class PetController : BaseController
 {
     private readonly IMediator _mediator;
-    public Pet(IMediator mediator)
+
+    public PetController(IMediator mediator)
     {
         _mediator = mediator;
     }
 
     // GET: api/<PetController>
     [HttpGet]
-    public async Task<List<PetModel>> Get()
+    public async Task<List<Pet>> Get()
     {
         return await _mediator.Send(new GetPetListQuery());
     }
@@ -55,7 +56,7 @@ public class Pet : BaseController
     }
     
     [HttpPost(template: "addPet")]
-    public async Task<ActionResult<PetModel>> AddPet([FromBody]PetModelDto petDto)
+    public async Task<ActionResult<Pet>> AddPet([FromBody]PetDto petDto)
     {
         try
         {
@@ -88,7 +89,7 @@ public class Pet : BaseController
     }
     
     [HttpPut("editPet/{petId}")]
-    public async Task<ActionResult<PetModel>> EditPet(int petId,[FromBody]PetModelDto petDto)
+    public async Task<ActionResult<Pet>> EditPet(int petId,[FromBody]PetDto petDto)
     {
         try
         {

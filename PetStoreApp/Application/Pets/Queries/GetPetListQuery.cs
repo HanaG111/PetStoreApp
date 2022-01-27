@@ -2,7 +2,7 @@
 using MediatR;
 
 namespace PetStoreApp.Application.Pets.Queries;
-public class GetPetListQuery : IRequest<List<PetModel>>
+public class GetPetListQuery : IRequest<List<Pet>>
     {
     }
 

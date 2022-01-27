@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using MediatR;
 using Microsoft.OpenApi.Models;
-using PetStoreApp.Application.Orders.OrderService;
-using PetStoreApp.Application.Pets.DataAccess;
-using PetStoreApp.Application.Users.UserService;
+using PetStoreApp.Application.Orders.Services;
+using PetStoreApp.Application.Pets.Services;
+using PetStoreApp.Application.Users.Services;
 
 namespace PetStoreApp;
     public class Startup
@@ -24,7 +24,7 @@ namespace PetStoreApp;
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddSingleton<IDataAccess, DataAccess>();
+            services.AddSingleton<IPetService, PetService>();
             services.AddSingleton<IOrderService, OrderService>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSwaggerGen(c =>

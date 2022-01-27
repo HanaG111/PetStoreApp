@@ -1,18 +1,18 @@
 ﻿using PetStoreApp.Domain.Models;
 using MediatR;
-using PetStoreApp.Application.Pets.DataAccess;
+using PetStoreApp.Application.Pets.Services;
 
 namespace PetStoreApp.Application.Pets.Queries;
-public class FindByStatusHandler : IRequestHandler<FindByStatusQuery, PetModel>
+public class FindByStatusHandler : IRequestHandler<FindByStatusQuery, Pet>
 {
-    private readonly IDataAccess _dataAccess;
-    public FindByStatusHandler(IDataAccess dataAccess)
+    private readonly IPetService _petService;
+    public FindByStatusHandler(IPetService petService)
     {
-        _dataAccess = dataAccess;
+        _petService = petService;
     }
-    public async Task<PetModel> Handle(FindByStatusQuery request, CancellationToken cancellationToken)
+    public async Task<Pet> Handle(FindByStatusQuery request, CancellationToken cancellationToken)
     {
-        var pet = _dataAccess.GetPets().FirstOrDefault(x => x.Status == request.Status);
+        var pet = _petService.GetPets().FirstOrDefault(x => x.Status == request.Status);
 
         if (pet.Status is not ("Available" or "Pending"))
         {

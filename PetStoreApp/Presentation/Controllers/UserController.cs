@@ -18,13 +18,13 @@ public class UserController : BaseController
 
     // GET: api/<UserController>
     [HttpGet]
-    public async Task<List<UserModel>> Get()
+    public async Task<List<User>> Get()
     {
         return await _mediator.Send(new GetUserListQuery());
     }
 
     [HttpPost(template: "createUser")]
-    public async Task<ActionResult<UserModel>> Create([FromBody]UserModelDto userDto)
+    public async Task<ActionResult<User>> Create([FromBody]UserDto userDto)
     {
         try
         {
@@ -56,7 +56,7 @@ public class UserController : BaseController
     }
     
     [HttpPut("editUser/{userId}")]
-    public async Task<ActionResult<UserModel>> EditUser(int userId,[FromBody]UserModelDto userDto)
+    public async Task<ActionResult<User>> EditUser(int userId,[FromBody]UserDto userDto)
     {
         try
         {

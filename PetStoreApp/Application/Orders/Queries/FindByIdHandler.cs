@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using PetStoreApp.Application.Orders.OrderService;
+using PetStoreApp.Application.Orders.Services;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Orders.Queries;
-public class FindByIdHandler : IRequestHandler<FindByIdQuery, OrderModel>
+public class FindByIdHandler : IRequestHandler<FindByIdQuery, Order>
 {
     private readonly IOrderService _orderService;
 
@@ -11,7 +11,7 @@ public class FindByIdHandler : IRequestHandler<FindByIdQuery, OrderModel>
     {
         _orderService = orderService;
     }
-    public async Task<OrderModel> Handle(FindByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Order> Handle(FindByIdQuery request, CancellationToken cancellationToken)
     {
         var order = _orderService.GetOrders().FirstOrDefault(x => x.OrderId == request.OrderId);
 

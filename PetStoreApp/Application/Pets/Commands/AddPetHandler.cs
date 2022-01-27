@@ -1,18 +1,18 @@
-﻿using PetStoreApp.Application.Pets.DataAccess;
+﻿using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Domain.Models;
 using MediatR;
 
 namespace PetStoreApp.Application.Pets.Commands;
-public class AddPetHandler : IRequestHandler<AddPetCommand, PetModel>
+public class AddPetHandler : IRequestHandler<AddPetCommand, Pet>
 {
-    private readonly IDataAccess _dataAccess;
-    public AddPetHandler(IDataAccess dataAccess)
+    private readonly IPetService _petService;
+    public AddPetHandler(IPetService petService)
     {
-        _dataAccess = dataAccess;
+        _petService = petService;
     }
-    public async Task<PetModel> Handle(AddPetCommand request, CancellationToken cancellationToken)
+    public async Task<Pet> Handle(AddPetCommand request, CancellationToken cancellationToken)
     {
-        return await Task.FromResult(_dataAccess.AddPet(request.PetId, request.PetDto));
+        return await Task.FromResult(_petService.AddPet(request.PetId, request.PetDto));
     }
 }
 

@@ -2,24 +2,24 @@
 using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
-namespace PetStoreApp.Application.Users.UserService;
+namespace PetStoreApp.Application.Users.Services;
 public class UserService : IUserService
 {
     private readonly IMediator _mediator;
 
-    private readonly List<UserModel> _user = new();
+    private readonly List<User> _user = new();
 
     public UserService()
     {
-        _user.Add(new UserModel {UserId = 1, Username = "hanag", FirstName = "Hana", LastName = "Gicevic", Email = "hanagicevic@gmail.com", Password = "12345678", Phone = "12345678", Status = 0});
+        _user.Add(new User {UserId = 1, Username = "hanag", FirstName = "Hana", LastName = "Gicevic", Email = "hanagicevic@gmail.com", Password = "12345678", Phone = "12345678", Status = 0});
     }
-    public List<UserModel> GetUsers()
+    public List<User> GetUsers()
     {
         return _user;
     }
-    public UserModel CreateUser(int userId, UserModelDto userDto)
+    public User CreateUser(int userId, UserDto userDto)
     {
-        UserModel user = new()
+        User user = new()
         {
             UserId = _user.Max(x => x.UserId) + 1,
             Username = userDto.Username,
@@ -32,9 +32,9 @@ public class UserService : IUserService
         };
         return user;
     }
-    public UserModel EditUser(int userId, UserModelDto userDto)
+    public User EditUser(int userId, UserDto userDto)
     {
-        UserModel user = new()
+        User user = new()
         {
             Username = userDto.Username,
             FirstName = userDto.FirstName,
@@ -46,7 +46,7 @@ public class UserService : IUserService
         };
         return user;
     }
-    public UserModel DeleteUser(UserModel user)
+    public User DeleteUser(User user)
     {
         var users = GetUsers();
         users.Remove(user);

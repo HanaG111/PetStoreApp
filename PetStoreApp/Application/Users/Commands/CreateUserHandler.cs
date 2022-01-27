@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using PetStoreApp.Application.Users.UserService;
+using PetStoreApp.Application.Users.Services;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Users.Commands;
 
-public class CreateUserHandler : IRequestHandler<CreateUserCommand, UserModel>
+public class CreateUserHandler : IRequestHandler<CreateUserCommand, User>
 {
     private readonly IUserService _userService;
 
@@ -12,7 +12,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, UserModel>
     {
         _userService = userService;
     }
-    public async Task<UserModel> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         return await Task.FromResult(_userService.CreateUser(request.UserId, request.UserDto));
     }

@@ -2,7 +2,7 @@
 using MediatR;
 
 namespace PetStoreApp.Application.Pets.Queries;
-public class FindByStatusQuery : IRequest<PetModel>
+public class FindByStatusQuery : IRequest<Pet>
 {
     public string Status { get; set; }
 }
