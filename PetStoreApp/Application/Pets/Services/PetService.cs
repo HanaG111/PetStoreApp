@@ -18,7 +18,7 @@ public class PetService : IPetService
     {
         return _pet;
     }
-    public Pet AddPet(int petId, PetDto petDto)
+    public Pet AddPet(PetDto petDto)
     {
         Pet p = new()
         {
@@ -28,21 +28,24 @@ public class PetService : IPetService
             Status = petDto.Status,
         };
         return p;
-    }
+    } 
     public Pet DeletePet(Pet pet)
     {
-         var pets = GetPets();
-          pets.Remove(pet);
-          return pet;
+        var pets = GetPets();
+        pets.Remove(pet);
+        return pet;
     }
-    public Pet EditPet(int petId, PetDto petDto)
+    public Pet EditPet(Pet pet)
     {
+       /* var pets = GetPets();
         Pet p = new()
         {
-            PetName = petDto.PetName,
-            Category = petDto.Category,
-            Status = petDto.Status,
+            PetName = pet.PetName,
         };
-        return p;
+        return p
+       */
+       var pets = _pet.Find(x => x.PetId == pet.PetId);
+       pets.
+
     }
 }

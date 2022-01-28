@@ -10,6 +10,7 @@
      {
          _petService = petService;
      }
+
      public async Task<Pet> Handle(EditPetCommand request, CancellationToken cancellationToken)
      {
          var pet = _petService.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
@@ -18,7 +19,7 @@
          {
              throw new ApplicationException("No Pet");
          }
-         
-         return await Task.FromResult(_petService.EditPet(request.PetId, request.PetDto));
+
+         return await Task.FromResult(_petService.EditPet(pet));
      }
  }

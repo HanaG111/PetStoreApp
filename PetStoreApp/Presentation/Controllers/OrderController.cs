@@ -18,7 +18,7 @@ public class OrderController : BaseController
 
     // GET: api/<OrderController>
     [HttpGet]
-    public async Task<List<Order>> Get()
+    public async Task<List<Order>> GetOrders()
     {
         return await _mediator.Send(new GetOrderListQuery());
     }
@@ -30,7 +30,8 @@ public class OrderController : BaseController
         {
             return Ok(await _mediator.Send(new CreateOrderCommand
             {
-                OrderDto = orderDto,
+                petId = orderDto.PetId,
+                quantity = orderDto.Quantity,
             }));
         }
         catch (Exception e)

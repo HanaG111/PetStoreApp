@@ -3,6 +3,7 @@ using PetStoreApp.Domain.Models;
 using PetStoreApp.Application.Pets.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PetStoreApp.Domain.Dtos;
 
 namespace PetStoreApp.Presentation.Controllers;
@@ -18,7 +19,7 @@ public class PetController : BaseController
 
     // GET: api/<PetController>
     [HttpGet]
-    public async Task<List<Pet>> Get()
+    public async Task<List<Pet>> GetPets()
     {
         return await _mediator.Send(new GetPetListQuery());
     }
@@ -95,8 +96,9 @@ public class PetController : BaseController
         {
             return Ok(await _mediator.Send(new EditPetCommand
             {
-            PetId = petId,
-            PetDto = petDto,
+                PetName = petDto.PetName,
+                Status = petDto.Status,
+                Category = petDto.Category
             }));
         }
         catch (Exception ex)

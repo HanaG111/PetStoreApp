@@ -6,6 +6,6 @@ namespace PetStoreApp.Application.Pets.Services;
     { 
         List<Pet> GetPets(); 
         Pet DeletePet(Pet pet);
-        Pet AddPet(int petId, PetDto petDto);
-        Pet EditPet(int petId, PetDto petDto);
+        Pet AddPet(PetDto petDto);
+        Pet EditPet(Pet pet);
     }

@@ -8,7 +8,6 @@ public class OrderService : IOrderService
     private readonly IMediator _mediator;
 
     private readonly List<Order> _order = new();
-
     public OrderService()
     {
         _order.Add(new Order {OrderId = 1, PetId = 1, Quantity = 1, ShipDate = "10/11/2021", Status = "Placed", Complete = true});
@@ -17,9 +16,9 @@ public class OrderService : IOrderService
     {
         return _order;
     }
-
     public Order CreateOrder(OrderDto orderDto)
     {
+        var orders = GetOrders();
         Order o = new()
         {
             OrderId = _order.Max(x => x.OrderId) + 1,
@@ -28,18 +27,14 @@ public class OrderService : IOrderService
             ShipDate = "21/10/2021",
             Status = "shiped",
             Complete = true,
-
         };
-        _order.Orders.Add(o);
-         var success = _orderService.SaveChangesAsync() > 0;
-         if (success) return Order.Value;
+        _order.Add(o);
+        return o;
     }
-    }
-
     public Order DeleteOrder(Order order)
     {
         var orders = GetOrders();
-        orders.Remove(order);
+        _order.Remove(order);
         return order;
     }
 }
