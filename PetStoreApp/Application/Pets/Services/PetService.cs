@@ -36,15 +36,9 @@ public class PetService : IPetService
         _pet.Remove(pet);
         return pet;
     }
-    public Pet EditPet(Pet pet)
-    { 
-        var pets = _pet.Find(x => x.PetId == pet.PetId);
-       Pet p = new()
-       {
-           PetName = pet.PetName,
-       };
-       return pets;
-
-
+    public Pet EditPet(Pet pet, string petName)
+    {
+        pet.PetName = petName;
+        return pet;
     }
 }

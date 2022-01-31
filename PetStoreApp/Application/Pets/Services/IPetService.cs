@@ -8,5 +8,5 @@ namespace PetStoreApp.Application.Pets.Services;
         List<Pet> GetPets(); 
         Pet DeletePet(Pet pet);
         Pet AddPet(AddPetCommand request);
-        Pet EditPet(Pet pet);
+        Pet EditPet(Pet pet, string petName);
     }

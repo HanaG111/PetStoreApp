@@ -13,17 +13,12 @@
 
      public async Task<Pet> Handle(EditPetCommand request, CancellationToken cancellationToken)
      {
-         var pet = _petService.GetPets().FirstOrDefault();
+         var pet = _petService.GetPets().Find(x => x.PetId == request.PetId);
 
-         if (pet.PetStatus == PetStatus.Sold)
-         {
-             throw new ApplicationException("Pet Sold");
-         }
-         if (pet.PetId == null)
+         if (pet == null)
          {
              throw new ApplicationException("No Pet");
          }
-
-         return await Task.FromResult(_petService.EditPet(pet));
+         return await Task.FromResult(_petService.EditPet(pet, request.PetName));
      }
  }

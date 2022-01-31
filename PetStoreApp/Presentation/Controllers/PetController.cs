@@ -98,9 +98,8 @@ public class PetController : BaseController
         {
             return Ok(await _mediator.Send(new EditPetCommand
             {
+                PetId = petId,
                 PetName = petDto.PetName,
-                PetStatus = PetStatus.Available,
-                Category = Category.Bunny
             }));
         }
         catch (Exception ex)
