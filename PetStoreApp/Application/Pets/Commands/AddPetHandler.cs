@@ -14,16 +14,7 @@ public class AddPetHandler : IRequestHandler<AddPetCommand, Pet>
     
     public async Task<Pet> Handle(AddPetCommand request, CancellationToken cancellationToken)
     {
-
-        /*    I need to check status
-                
-                Is Available
-                
-                IsPending
-                    
-                    IsSold
-         */   
-    return await Task.FromResult(_petService.AddPet(request));
+        return await Task.FromResult(_petService.AddPet(request));
     
     }
 }

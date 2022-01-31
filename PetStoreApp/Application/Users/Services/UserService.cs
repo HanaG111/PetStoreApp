@@ -19,6 +19,7 @@ public class UserService : IUserService
     }
     public User CreateUser(CreateUserCommand request)
     {
+        var orders = GetUsers();
         User user = new()
         {
             UserId = _user.Max(x => x.UserId) + 1,
@@ -30,6 +31,7 @@ public class UserService : IUserService
             Phone = request.Phone,
             Status = request.Status
         };
+        _user.Add(user);
         return user;
     }
     public User EditUser(EditUserCommand request)

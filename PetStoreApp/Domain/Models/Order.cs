@@ -18,6 +18,10 @@ public class Order : OrderEntity
     {
         return OrderStatus == OrderStatus.Shipped;
     }
+    private bool IsComplete()
+    {
+        return OrderStatus == OrderStatus.Shipped;
+    }
 }
 public enum OrderStatus
 {
@@ -25,3 +29,4 @@ public enum OrderStatus
     Processing,
     Shipped
 }
+

@@ -26,7 +26,4 @@ public class UserDto
     [Required(ErrorMessage = "The field {0} is required")]
     [StringLength(50)]
     public string Phone { get; set; }
-    [Required(ErrorMessage = "The field {0} is required")]
-    [StringLength(50)]
-    public int Status { get; set; }
 }

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using PetStoreApp.Application.Users.Services;
-using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Users.Commands;

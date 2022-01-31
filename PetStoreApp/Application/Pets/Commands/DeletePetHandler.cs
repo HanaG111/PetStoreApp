@@ -13,7 +13,7 @@ public class DeletePetHandler : IRequestHandler<DeletePetCommand, Pet>
     public async Task<Pet> Handle(DeletePetCommand request, CancellationToken cancellationToken)
     {
         var pet= _petService.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
-
+        
         if (pet == null)
         {
             throw new ApplicationException("No Pet");

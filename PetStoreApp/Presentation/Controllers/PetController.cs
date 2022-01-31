@@ -3,7 +3,7 @@ using PetStoreApp.Domain.Models;
 using PetStoreApp.Application.Pets.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 using PetStoreApp.Domain.Dtos;
 
 namespace PetStoreApp.Presentation.Controllers;

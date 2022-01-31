@@ -37,16 +37,14 @@ public class PetService : IPetService
         return pet;
     }
     public Pet EditPet(Pet pet)
-    {
-       /* var pets = GetPets();
-        Pet p = new()
-        {
-            PetName = pet.PetName,
-        };
-        return p
-       */
-       var pets = _pet.Find(x => x.PetId == pet.PetId);
+    { 
+        var pets = _pet.Find(x => x.PetId == pet.PetId);
+       Pet p = new()
+       {
+           PetName = pet.PetName,
+       };
        return pets;
+
 
     }
 }

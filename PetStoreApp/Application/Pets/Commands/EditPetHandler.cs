@@ -13,9 +13,13 @@
 
      public async Task<Pet> Handle(EditPetCommand request, CancellationToken cancellationToken)
      {
-         var pet = _petService.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
+         var pet = _petService.GetPets().FirstOrDefault();
 
-         if (pet == null)
+         if (pet.PetStatus == PetStatus.Sold)
+         {
+             throw new ApplicationException("Pet Sold");
+         }
+         if (pet.PetId == null)
          {
              throw new ApplicationException("No Pet");
          }

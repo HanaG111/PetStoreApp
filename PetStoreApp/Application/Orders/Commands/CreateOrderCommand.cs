@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Orders.Commands;
+
 public class CreateOrderCommand : IRequest<Order>
 {
     public int PetId { get; set; }
@@ -11,5 +11,4 @@ public class CreateOrderCommand : IRequest<Order>
     public OrderStatus OrderStatus { get; set; }
 
     public bool Complete { get; set; }
-    
 }

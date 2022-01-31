@@ -5,15 +5,15 @@ public class Pet : Entity
     public Category Category { get; set; }
     public PetStatus PetStatus { get; set; }
 
-    private bool IsAvailable()
+    public bool IsAvailable()
     {
         return PetStatus == PetStatus.Available;
     }
-    private bool IsPending()
+    public bool IsPending()
     {
         return PetStatus == PetStatus.Pending;
     }
-    private bool IsSold()
+    public bool IsSold()
     {
         return PetStatus == PetStatus.Sold;
     }

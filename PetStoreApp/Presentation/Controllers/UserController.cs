@@ -10,7 +10,7 @@ namespace PetStoreApp.Presentation.Controllers;
 public class UserController : BaseController
 {
     private readonly IMediator _mediator;
-    
+
     public UserController(IMediator mediator)
     {
         _mediator = mediator;
@@ -24,19 +24,18 @@ public class UserController : BaseController
     }
 
     [HttpPost(template: "createUser")]
-    public async Task<ActionResult<User>> Create([FromBody]UserDto userDto)
+    public async Task<ActionResult<User>> Create([FromBody] UserDto userDto)
     {
         try
         {
             return Ok(await _mediator.Send(new CreateUserCommand
             {
-                Username  = userDto.Username,
+                Username = userDto.Username,
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
                 Email = userDto.Email,
                 Password = userDto.Password,
                 Phone = userDto.Phone,
-                Status = userDto.Status
             }));
         }
         catch (Exception e)
@@ -44,7 +43,7 @@ public class UserController : BaseController
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpGet("{username}")]
     public async Task<IActionResult> FindByUsername(string username)
     {
@@ -60,21 +59,20 @@ public class UserController : BaseController
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpPut("editUser/{userId}")]
-    public async Task<ActionResult<User>> EditUser([FromBody]UserDto userDto)
+    public async Task<ActionResult<User>> EditUser([FromBody] UserDto userDto)
     {
         try
         {
             return Ok(await _mediator.Send(new EditUserCommand
             {
-                Username  = userDto.Username,
+                Username = userDto.Username,
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
                 Email = userDto.Email,
                 Password = userDto.Password,
                 Phone = userDto.Phone,
-                Status = userDto.Status
             }));
         }
         catch (Exception ex)
@@ -82,7 +80,7 @@ public class UserController : BaseController
             return BadRequest(ex.Message);
         }
     }
-    
+
     [HttpDelete("deleteUser/{userId}")]
     public async Task<IActionResult> DeleteUser(int userId)
     {

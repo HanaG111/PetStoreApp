@@ -3,7 +3,6 @@ using PetStoreApp.Application.Orders.Services;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Orders.Queries;
-
 public class FindByStatusHandler : IRequestHandler<FindByStatusQuery, Order>
 {
     private readonly IOrderService _orderService;
@@ -17,7 +16,7 @@ public class FindByStatusHandler : IRequestHandler<FindByStatusQuery, Order>
     {
         var order = _orderService.GetOrders().FirstOrDefault(x => x.OrderStatus == request.OrderStatus);
 
-        if (order.OrderStatus != OrderStatus.Placed)
+        if (order == null)
         {
             throw new ApplicationException("This status does not exist");
         }
