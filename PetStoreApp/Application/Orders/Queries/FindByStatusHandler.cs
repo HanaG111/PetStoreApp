@@ -15,9 +15,9 @@ public class FindByStatusHandler : IRequestHandler<FindByStatusQuery, Order>
     
     public async Task<Order> Handle(FindByStatusQuery request, CancellationToken cancellationToken)
     {
-        var order = _orderService.GetOrders().FirstOrDefault(x => x.Status == request.Status);
+        var order = _orderService.GetOrders().FirstOrDefault(x => x.OrderStatus == request.OrderStatus);
 
-        if (order.Status is not ("Placed" or "Unplaced"))
+        if (order.OrderStatus != OrderStatus.Placed)
         {
             throw new ApplicationException("This status does not exist");
         }

@@ -5,11 +5,11 @@ using PetStoreApp.Domain.Models;
 namespace PetStoreApp.Application.Orders.Commands;
 public class CreateOrderCommand : IRequest<Order>
 {
-    public int petId { get; set; }
-    public int quantity { get; set; }
-    public string shipDate { get; set; }
-    public enum status { get; set; }
+    public int PetId { get; set; }
+    public int Quantity { get; set; }
+    public string ShipDate { get; set; }
+    public OrderStatus OrderStatus { get; set; }
 
-    public bool complete { get; set; }
+    public bool Complete { get; set; }
     
 }

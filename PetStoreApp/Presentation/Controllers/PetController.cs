@@ -24,14 +24,14 @@ public class PetController : BaseController
         return await _mediator.Send(new GetPetListQuery());
     }
     
-    [HttpGet("status/{status}")]
-    public async Task<IActionResult> FindByStatus(string status)
+    [HttpGet("petStatus/{petStatus}")]
+    public async Task<IActionResult> FindByStatus(string petStatus)
     {
         try
         {
             return Ok(await _mediator.Send(new FindByStatusQuery()
             {
-                Status = status
+                PetStatus = PetStatus.Available
             }));
         }
         catch (Exception e)
@@ -63,7 +63,9 @@ public class PetController : BaseController
         {
             return Ok(await _mediator.Send(new AddPetCommand
             {
-                PetDto = petDto,
+                PetName = petDto.PetName,
+                Category = Category.Cat,
+                PetStatus = PetStatus.Pending,
             }));
         }
         catch (Exception e)
@@ -97,8 +99,8 @@ public class PetController : BaseController
             return Ok(await _mediator.Send(new EditPetCommand
             {
                 PetName = petDto.PetName,
-                Status = petDto.Status,
-                Category = petDto.Category
+                PetStatus = PetStatus.Available,
+                Category = Category.Bunny
             }));
         }
         catch (Exception ex)

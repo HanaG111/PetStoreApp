@@ -1,11 +1,12 @@
-﻿using PetStoreApp.Domain.Dtos;
+﻿using PetStoreApp.Application.Users.Commands;
+using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Users.Services;
 public interface IUserService
 {
     List<User> GetUsers(); 
-    User CreateUser(int userId, UserDto userDto);
-    User EditUser(int userId, UserDto userDto);
+    User CreateUser(CreateUserCommand request);
+    User EditUser(EditUserCommand request);
     User DeleteUser(User user);
 }

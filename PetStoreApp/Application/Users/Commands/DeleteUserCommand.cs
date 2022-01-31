@@ -6,5 +6,5 @@ namespace PetStoreApp.Application.Users.Commands;
 public class DeleteUserCommand : IRequest<User>
 {
     public int UserId { get; set; }
-    public UserDto UserDto { get; set; }
+    
 }

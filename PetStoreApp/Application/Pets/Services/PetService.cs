@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using PetStoreApp.Application.Pets.Commands;
 using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
@@ -10,29 +11,29 @@ public class PetService : IPetService
     private readonly List<Pet> _pet = new();
     public PetService()
     {
-        _pet.Add(new Pet {PetId = 1, PetName = "Ice", Category = "Dog", Status = "Available"});
-        _pet.Add(new Pet {PetId = 2, PetName = "Donna", Category = "Cat", Status = "Pending"});
-        _pet.Add(new Pet {PetId = 3, PetName = "Max", Category = "Dog", Status = "Available"});
+        _pet.Add(new Pet {PetId = 1, PetName = "Ice", Category = Category.Bunny, PetStatus = PetStatus.Available});
+        _pet.Add(new Pet {PetId = 2, PetName = "Donna", Category = Category.Dog, PetStatus = PetStatus.Pending});
+        _pet.Add(new Pet {PetId = 3, PetName = "Max", Category = Category.Cat, PetStatus = PetStatus.Sold});
     }
     public List<Pet> GetPets()
     {
         return _pet;
     }
-    public Pet AddPet(PetDto petDto)
+    public Pet AddPet(AddPetCommand request)
     {
         Pet p = new()
         {
             PetId = _pet.Max(x => x.PetId) + 1,
-            PetName = petDto.PetName,
-            Category = petDto.Category,
-            Status = petDto.Status,
+            PetName = request.PetName,
+            Category = Category.Bunny,
+            PetStatus = PetStatus.Available,
         };
+        _pet.Add(p);
         return p;
     } 
     public Pet DeletePet(Pet pet)
     {
-        var pets = GetPets();
-        pets.Remove(pet);
+        _pet.Remove(pet);
         return pet;
     }
     public Pet EditPet(Pet pet)
@@ -45,7 +46,7 @@ public class PetService : IPetService
         return p
        */
        var pets = _pet.Find(x => x.PetId == pet.PetId);
-       pets.
+       return pets;
 
     }
 }

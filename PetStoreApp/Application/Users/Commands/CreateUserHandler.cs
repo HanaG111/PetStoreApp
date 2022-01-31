@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using PetStoreApp.Application.Users.Services;
+using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Users.Commands;
@@ -14,6 +15,6 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, User>
     }
     public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        return await Task.FromResult(_userService.CreateUser(request.UserId, request.UserDto));
+        return await Task.FromResult(_userService.CreateUser(request));
     }
 }

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PetStoreApp.Domain.Dtos;
+using PetStoreApp.Application.Users.Commands;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Users.Services;
@@ -17,32 +17,32 @@ public class UserService : IUserService
     {
         return _user;
     }
-    public User CreateUser(int userId, UserDto userDto)
+    public User CreateUser(CreateUserCommand request)
     {
         User user = new()
         {
             UserId = _user.Max(x => x.UserId) + 1,
-            Username = userDto.Username,
-            FirstName = userDto.FirstName,
-            LastName = userDto.LastName,
-            Email = userDto.Email,
-            Password = userDto.Password,
-            Phone = userDto.Phone,
-            Status = userDto.Status
+            Username = request.Username,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email,
+            Password = request.Password,
+            Phone = request.Phone,
+            Status = request.Status
         };
         return user;
     }
-    public User EditUser(int userId, UserDto userDto)
+    public User EditUser(EditUserCommand request)
     {
         User user = new()
         {
-            Username = userDto.Username,
-            FirstName = userDto.FirstName,
-            LastName = userDto.LastName,
-            Email = userDto.Email,
-            Password = userDto.Password,
-            Phone = userDto.Phone,
-            Status = userDto.Status
+            Username = request.Username,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email,
+            Password = request.Password,
+            Phone = request.Phone,
+            Status = request.Status
         };
         return user;
     }

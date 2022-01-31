@@ -7,8 +7,6 @@ namespace PetStoreApp.Application.Pets.Commands;
 public class AddPetHandler : IRequestHandler<AddPetCommand, Pet>
 {
     private readonly IPetService _petService;
-    
-    private readonly PetDto 
     public AddPetHandler(IPetService petService)
     {
         _petService = petService;
@@ -16,22 +14,16 @@ public class AddPetHandler : IRequestHandler<AddPetCommand, Pet>
     
     public async Task<Pet> Handle(AddPetCommand request, CancellationToken cancellationToken)
     {
-        var pet= _petService.AddPet();
 
-        if (pet == null)
-        {
-            throw new ApplicationException("No Pet");
-        }
-
-    /*    I need to check status
-            
-            Is Available
-            
-            IsPending
+        /*    I need to check status
                 
-                IsSold
-     */   
-    return await Task.FromResult(_petService.AddPet(request.PetId,));
+                Is Available
+                
+                IsPending
+                    
+                    IsSold
+         */   
+    return await Task.FromResult(_petService.AddPet(request));
     
     }
 }

@@ -2,32 +2,31 @@
 public class Pet : Entity
 {
     public string PetName { get; set; }
-    public enum Category 
-    {  
-        Dog, 
-        Cat, 
-        Bunny 
-    }
-    public enum Status
+    public Category Category { get; set; }
+    public PetStatus PetStatus { get; set; }
+
+    private bool IsAvailable()
     {
-        Available,
-        Pending,
-        Sold
+        return PetStatus == PetStatus.Available;
     }
-       
-    /* 
-     public IsAvailable(string status)
-     {
-         if (this.status == "Available")
-             return true;
-     }
-     
-  
-     
-     IsAvailable 
-         IsPending
-     IsSold
-         
-         GetPet to check if pet exists
-    */
+    private bool IsPending()
+    {
+        return PetStatus == PetStatus.Pending;
+    }
+    private bool IsSold()
+    {
+        return PetStatus == PetStatus.Sold;
+    }
+}
+public enum Category 
+{  
+   Dog = 0, 
+   Cat = 1, 
+   Bunny = 2 
+}
+public enum PetStatus
+{
+   Available = 0,
+   Pending = 1,
+   Sold = 2
 }

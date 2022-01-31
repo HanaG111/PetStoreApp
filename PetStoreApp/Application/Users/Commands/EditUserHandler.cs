@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using PetStoreApp.Application.Users.Services;
+using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Users.Commands;
@@ -19,6 +20,6 @@ public class EditUserHandler : IRequestHandler<EditUserCommand, User>
         {
             throw new ApplicationException("No User with this Id");
         }
-        return await Task.FromResult(_userService.EditUser(request.UserId, request.UserDto));
+        return await Task.FromResult(_userService.EditUser(request));
     }
 }

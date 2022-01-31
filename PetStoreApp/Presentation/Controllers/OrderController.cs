@@ -30,8 +30,8 @@ public class OrderController : BaseController
         {
             return Ok(await _mediator.Send(new CreateOrderCommand
             {
-                petId = orderDto.PetId,
-                quantity = orderDto.Quantity,
+                PetId = orderDto.PetId,
+                Quantity = orderDto.Quantity,
             }));
         }
         catch (Exception e)
@@ -72,14 +72,14 @@ public class OrderController : BaseController
         }
     }
 
-    [HttpGet("orderStatus/{status}")]
-    public async Task<IActionResult> FindByStatus(string status)
+    [HttpGet("orderStatus/{orderStatus}")]
+    public async Task<IActionResult> FindByStatus(string orderStatus)
     {
         try
         {
             return Ok(await _mediator.Send(new FindByStatusQuery()
             {
-                Status = status
+                OrderStatus = OrderStatus.Placed
             }));
         }
         catch (Exception e)

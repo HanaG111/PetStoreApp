@@ -30,7 +30,13 @@ public class UserController : BaseController
         {
             return Ok(await _mediator.Send(new CreateUserCommand
             {
-                UserDto = userDto,
+                Username  = userDto.Username,
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                Password = userDto.Password,
+                Phone = userDto.Phone,
+                Status = userDto.Status
             }));
         }
         catch (Exception e)
@@ -56,14 +62,19 @@ public class UserController : BaseController
     }
     
     [HttpPut("editUser/{userId}")]
-    public async Task<ActionResult<User>> EditUser(int userId,[FromBody]UserDto userDto)
+    public async Task<ActionResult<User>> EditUser([FromBody]UserDto userDto)
     {
         try
         {
             return Ok(await _mediator.Send(new EditUserCommand
             {
-                UserId = userId,
-                UserDto = userDto,
+                Username  = userDto.Username,
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+                Password = userDto.Password,
+                Phone = userDto.Phone,
+                Status = userDto.Status
             }));
         }
         catch (Exception ex)
