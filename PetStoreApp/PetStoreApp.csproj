@@ -9,18 +9,22 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="11.0.0" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+      <PackageReference Include="CsvHelper" Version="27.2.1" />
+      <PackageReference Include="CsvReaderWriter" Version="0.7.0" />
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
       <PackageReference Include="Microsoft.OpenApi" Version="1.3.1-preview" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="SwaggerUi" Version="1.1.0" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.2.3" />
+      <PackageReference Include="System.IO" Version="4.3.0" />
+      <PackageReference Include="System.Text.Json" Version="6.0.1" />
+      <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Infrastructure\Context" />
-      <Folder Include="Infrastructure\Migrations" />
       <Folder Include="Infrastructure\Repositories" />
     </ItemGroup>
 

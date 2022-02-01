@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using PetStoreApp.Application.Orders.Services;
 using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Application.Users.Services;
+using PetStoreApp.Infrastructure;
 
 namespace PetStoreApp;
     public class Startup
@@ -27,6 +28,7 @@ namespace PetStoreApp;
             services.AddSingleton<IPetService, PetService>();
             services.AddSingleton<IOrderService, OrderService>();
             services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IFileReadWrite, FileReadWrite>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"});

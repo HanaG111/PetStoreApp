@@ -1,5 +1,4 @@
 ﻿using PetStoreApp.Application.Pets.Commands;
-using PetStoreApp.Domain.Dtos;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Application.Pets.Services;
@@ -7,6 +6,6 @@ namespace PetStoreApp.Application.Pets.Services;
     { 
         List<Pet> GetPets(); 
         Pet DeletePet(Pet pet);
-        Pet AddPet(AddPetCommand request);
+        Task<Pet> AddPet(AddPetCommand request);
         Pet EditPet(Pet pet, string petName);
     }

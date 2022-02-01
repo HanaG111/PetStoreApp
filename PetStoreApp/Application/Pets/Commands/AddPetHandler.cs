@@ -2,6 +2,7 @@
 using PetStoreApp.Domain.Models;
 using MediatR;
 using PetStoreApp.Domain.Dtos;
+using PetStoreApp.Infrastructure;
 
 namespace PetStoreApp.Application.Pets.Commands;
 public class AddPetHandler : IRequestHandler<AddPetCommand, Pet>
@@ -11,10 +12,9 @@ public class AddPetHandler : IRequestHandler<AddPetCommand, Pet>
     {
         _petService = petService;
     }
-    
     public async Task<Pet> Handle(AddPetCommand request, CancellationToken cancellationToken)
     {
-        return await Task.FromResult(_petService.AddPet(request));
+        return await Task.FromResult(await _petService.AddPet(request));
     
     }
 }
