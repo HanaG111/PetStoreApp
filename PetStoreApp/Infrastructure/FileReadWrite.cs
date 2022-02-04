@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Text.Json;
+using MediatR;
 using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Domain.Models;
 
@@ -12,11 +13,15 @@ public class FileReadWrite : IFileReadWrite
     {
         List<Pet> pets = new List<Pet>();
         
-        var text = System.IO.File.ReadAllText("DbPets.txt");
+        var text = File.ReadAllText("DbPets.txt");
 
-        string lines = System.IO.File.ReadAllLines("DbPets.txt");
+        pets = JsonSerializer.Deserialize<List<Pet>>(text);
+        
+        // await File.WriteAllTextAsync("DbPets.txt", json);
+        //
+        // var lines = System.IO.File.ReadAllLines("DbPets.txt");
 
-        pets = lines.ToList<Pet>();
+        // pets = lines.ToList<Pet>();
         // foreach (var line in lines)
         // {
         //     Console.WriteLine("\t" + line);
@@ -27,8 +32,15 @@ public class FileReadWrite : IFileReadWrite
     }
     public async Task Write(Pet pet)
     {
-        List<string> pets= new List<string>();
-        pets.Add(pet.PetName);
-        await File.AppendAllLinesAsync("DbPets.txt", pets);
+        List<Pet> pets= new List<Pet>();
+        pets.Add(pet);
+
+        string json = JsonSerializer.Serialize(pets);
+        // List<String> petobj= new List<String>();
+        // petobj.Add(json);
+
+        await File.WriteAllTextAsync("DbPets.txt", json);
+
+        // await File.AppendAllLinesAsync("DbPets.txt", pets);
     }
 }
