@@ -9,6 +9,5 @@ public class CreateOrderCommand : IRequest<Order>
     public int Quantity { get; set; }
     public string ShipDate { get; set; }
     public OrderStatus OrderStatus { get; set; }
-
     public bool Complete { get; set; }
 }

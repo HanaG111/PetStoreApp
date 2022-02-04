@@ -4,7 +4,7 @@ using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Infrastructure;
-public class FileReadWrite : IFileReadWrite
+public class PetsReadWrite : IPetsReadWrite
 {
     private readonly IPetService _petService;
     private readonly IMediator _mediator;

@@ -6,6 +6,6 @@ namespace PetStoreApp.Application.Orders.Services;
 public interface IOrderService
 {
     List<Order> GetOrders(); 
-    Order CreateOrder(CreateOrderCommand request);
+    Task<Order> CreateOrder(CreateOrderCommand request);
     Order DeleteOrder(Order order);
 }

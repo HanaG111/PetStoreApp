@@ -28,7 +28,8 @@ namespace PetStoreApp;
             services.AddSingleton<IPetService, PetService>();
             services.AddSingleton<IOrderService, OrderService>();
             services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<IFileReadWrite, FileReadWrite>();
+            services.AddSingleton<IPetsReadWrite, PetsReadWrite>();
+            services.AddSingleton<IOrderReadWrite, OrderReadWrite>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"});

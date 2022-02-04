@@ -7,19 +7,19 @@ namespace PetStoreApp.Application.Pets.Services;
 public class PetService : IPetService
 {
     private readonly IMediator _mediator;
-    private readonly IFileReadWrite _fileReadWrite;
+    private readonly IPetsReadWrite _petsReadWrite;
 
     private readonly List<Pet> _pet = new();
-    public PetService(IFileReadWrite fileReadWrite)
+    public PetService(IPetsReadWrite petsReadWrite)
     {
-        _fileReadWrite = fileReadWrite;
+        _petsReadWrite = petsReadWrite;
         _pet.Add(new Pet {PetId = 1, PetName = "Ice", Category = Category.Bunny, PetStatus = PetStatus.Available});
         _pet.Add(new Pet {PetId = 2, PetName = "Donna", Category = Category.Dog, PetStatus = PetStatus.Pending});
         _pet.Add(new Pet {PetId = 3, PetName = "Max", Category = Category.Cat, PetStatus = PetStatus.Sold});
     }
     public List<Pet> GetPets()
     {
-        return _fileReadWrite.Read();
+        return _petsReadWrite.Read();
         // return _pet;
     }
     public async Task<Pet> AddPet(AddPetCommand request)
@@ -32,19 +32,18 @@ public class PetService : IPetService
             PetStatus = PetStatus.Available,
         };
         _pet.Add(p);
-        await _fileReadWrite.Write(p);
+        await _petsReadWrite.Write(p);
         return p;
     }
     public Pet DeletePet(Pet pet)
     {
         _pet.Remove(pet);
-        _fileReadWrite.Write(pet);
         return pet;
     }
     public Pet EditPet(Pet pet, string petName)
     {
         pet.PetName = petName;
-        _fileReadWrite.Write(pet);
+        _petsReadWrite.Write(pet);
         return pet;
     }
 }
