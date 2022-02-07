@@ -19,6 +19,6 @@
          {
              throw new ApplicationException("No Pet");
          }
-         return await Task.FromResult(_petService.EditPet(pet, request.PetName));
+         return await Task.FromResult(await _petService.EditPet(pet, request.PetName));
      }
  }

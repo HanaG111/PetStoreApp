@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.RegularExpressions;
 using MediatR;
 using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Domain.Models;
@@ -12,7 +13,7 @@ public class PetsReadWrite : IPetsReadWrite
 
     public List<Pet> Read()
     {
-        List<Pet> pets = new List<Pet>();
+        List<Pet> pets= new List<Pet>();
         var text = File.ReadAllText("DbPets.txt");
         pets = JsonSerializer.Deserialize<List<Pet>>(text);
 
@@ -56,12 +57,24 @@ public class PetsReadWrite : IPetsReadWrite
         await File.WriteAllTextAsync("DbPets.txt", json);
     }
     
-    public Pet Edit(Pet pet)
+    public async Task Edit(Pet pet, string petName)
     {
+        // List<Pet> pets = await File.ReadAllTextAsync("DbPets.txt");
+        // pets = Regex.Replace(pets, pet.PetName, petName);
+        // await File.WriteAllLinesAsync("DbPets.txt", new[] {pets});
+        // pet.PetName = petName;
+        // var json = JsonSerializer.Serialize(pets);
+        // await File.WriteAllTextAsync("DbPets.txt", json);
+        //
         List<Pet> pets = Read();
+        pets.RemoveAll(x => x.PetId == pet.PetId);
+        pet.PetName = petName;
         pets.Add(pet);
         string json = JsonSerializer.Serialize(pets);
-        File.WriteAllTextAsync("DbPets.txt", json);
-        return pet;
+        await File.WriteAllTextAsync("DbPets.txt", json);
+        // pets.RemoveAll(x => x.PetId == pet.PetId);
+        // pets.Add(pet = new Pet());
+        // string json = JsonSerializer.Serialize(pets);
+        // await File.WriteAllTextAsync("DbPets.txt", json);
     }
 }

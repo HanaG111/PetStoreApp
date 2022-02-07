@@ -34,18 +34,16 @@ public class PetService : IPetService
     }
     public async Task<Pet> DeletePet(Pet pet)
     {
-        // _pet.Remove(pet);
         var findPet = _pet.Find(x => x.PetId == pet.PetId);
         await _petsReadWrite.Remove(pet);
         return pet;
-       
     }
-    public Pet EditPet(Pet pet, string petName)
+    public async Task<Pet> EditPet(Pet pet, string petName)
     {
+        var findPet = _pet.Find(x => x.PetId == pet.PetId);
         pet.PetName = petName;
-        _petsReadWrite.Equals(petName = petName);
-        return _petsReadWrite.Edit(pet);
-        
+        await _petsReadWrite.Edit(pet, petName);
+        return pet;
     }
 }
     
