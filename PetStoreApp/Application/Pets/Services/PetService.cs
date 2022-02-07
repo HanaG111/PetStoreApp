@@ -13,9 +13,6 @@ public class PetService : IPetService
     public PetService(IPetsReadWrite petsReadWrite)
     {
         _petsReadWrite = petsReadWrite;
-        _pet.Add(new Pet {PetId = 1, PetName = "Ice", Category = Category.Bunny, PetStatus = PetStatus.Available});
-        _pet.Add(new Pet {PetId = 2, PetName = "Donna", Category = Category.Dog, PetStatus = PetStatus.Pending});
-        _pet.Add(new Pet {PetId = 3, PetName = "Max", Category = Category.Cat, PetStatus = PetStatus.Sold});
     }
     public List<Pet> GetPets()
     {
@@ -26,7 +23,7 @@ public class PetService : IPetService
     {
         Pet p = new()
         {
-            PetId = _pet.Max(x => x.PetId) + 1,
+            PetId = GetPets().Max(x => x.PetId) + 1,
             PetName = request.PetName,
             Category = Category.Bunny,
             PetStatus = PetStatus.Available,
@@ -35,16 +32,20 @@ public class PetService : IPetService
         await _petsReadWrite.Write(p);
         return p;
     }
-    public Pet DeletePet(Pet pet)
+    public async Task<Pet> DeletePet(Pet pet)
     {
-        _pet.Remove(pet);
+        // _pet.Remove(pet);
+        var findPet = _pet.Find(x => x.PetId == pet.PetId);
+        await _petsReadWrite.Remove(pet);
         return pet;
+       
     }
     public Pet EditPet(Pet pet, string petName)
     {
         pet.PetName = petName;
-        _petsReadWrite.Write(pet);
-        return pet;
+        _petsReadWrite.Equals(petName = petName);
+        return _petsReadWrite.Edit(pet);
+        
     }
 }
     

@@ -18,11 +18,11 @@ public class Pet : Entity
         return PetStatus == PetStatus.Sold;
     }
 }
-public enum Category 
-{  
-   Dog = 0, 
-   Cat = 1, 
-   Bunny = 2 
+public enum Category
+{
+    Dog = 0,
+    Cat = 1,
+    Bunny = 2
 }
 public enum PetStatus
 {

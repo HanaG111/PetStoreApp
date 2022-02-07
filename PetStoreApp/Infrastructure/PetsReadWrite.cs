@@ -4,6 +4,7 @@ using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Infrastructure;
+
 public class PetsReadWrite : IPetsReadWrite
 {
     private readonly IPetService _petService;
@@ -12,11 +13,9 @@ public class PetsReadWrite : IPetsReadWrite
     public List<Pet> Read()
     {
         List<Pet> pets = new List<Pet>();
-        
         var text = File.ReadAllText("DbPets.txt");
-
         pets = JsonSerializer.Deserialize<List<Pet>>(text);
-        
+
         // await File.WriteAllTextAsync("DbPets.txt", json);
         //
         // var lines = System.IO.File.ReadAllLines("DbPets.txt");
@@ -30,17 +29,39 @@ public class PetsReadWrite : IPetsReadWrite
         // System.Console.ReadKey();
         return pets;
     }
+
     public async Task Write(Pet pet)
     {
-        List<Pet> pets= new List<Pet>();
-        pets.Add(pet);
+        if (File.ReadAllText("DbPets.txt").Length == 0)
+        {
+            List<Pet> pets = new List<Pet>();
+            pets.Add(pet);
+            string json = JsonSerializer.Serialize(pets);
+            await File.WriteAllTextAsync("DbPets.txt", json);
+        }
+        else
+        {
+            List<Pet> pets = Read();
+            pets.Add(pet);
+            string json = JsonSerializer.Serialize(pets);
+            await File.WriteAllTextAsync("DbPets.txt", json);
+        }
+    }
 
+    public async Task Remove(Pet pet)
+    {
+        List<Pet> pets = Read();
+        pets.RemoveAll(x => x.PetId == pet.PetId);
         string json = JsonSerializer.Serialize(pets);
-        // List<String> petobj= new List<String>();
-        // petobj.Add(json);
-
         await File.WriteAllTextAsync("DbPets.txt", json);
-
-        // await File.AppendAllLinesAsync("DbPets.txt", pets);
+    }
+    
+    public Pet Edit(Pet pet)
+    {
+        List<Pet> pets = Read();
+        pets.Add(pet);
+        string json = JsonSerializer.Serialize(pets);
+        File.WriteAllTextAsync("DbPets.txt", json);
+        return pet;
     }
 }

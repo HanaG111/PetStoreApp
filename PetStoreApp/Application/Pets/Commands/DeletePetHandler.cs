@@ -19,6 +19,6 @@ public class DeletePetHandler : IRequestHandler<DeletePetCommand, Pet>
             throw new ApplicationException("No Pet");
         }
 
-        return await Task.FromResult(_petService.DeletePet(pet));
+        return await Task.FromResult(await _petService.DeletePet(pet));
     }
 }
