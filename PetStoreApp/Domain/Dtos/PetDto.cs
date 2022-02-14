@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PetStoreApp.Domain.Models;
 
 namespace PetStoreApp.Domain.Dtos;
 

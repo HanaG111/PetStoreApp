@@ -22,6 +22,6 @@ public class DeleteOrderHandler : IRequestHandler<DeleteOrderCommand, Order>
             throw new ApplicationException("No Order with this Id");
         }
 
-        return await Task.FromResult(_orderService.DeleteOrder(order));
+        return await Task.FromResult(await _orderService.DeleteOrder(order));
     }
 }

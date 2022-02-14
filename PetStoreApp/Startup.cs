@@ -5,6 +5,7 @@ using PetStoreApp.Application.Orders.Services;
 using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Application.Users.Services;
 using PetStoreApp.Infrastructure;
+using PetStoreApp.Infrastructure.Repositories.Pet;
 
 namespace PetStoreApp;
     public class Startup
@@ -28,7 +29,7 @@ namespace PetStoreApp;
             services.AddSingleton<IPetService, PetService>();
             services.AddSingleton<IOrderService, OrderService>();
             services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<IPetsReadWrite, PetsReadWrite>();
+            services.AddSingleton<IPetRepository, PetRepository>();
             services.AddSingleton<IOrderReadWrite, OrderReadWrite>();
             services.AddSwaggerGen(c =>
             {

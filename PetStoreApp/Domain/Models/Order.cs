@@ -25,8 +25,8 @@ public class Order : OrderEntity
 }
 public enum OrderStatus
 {
-    Placed,
-    Processing,
-    Shipped
+    Placed = 1,
+    Processing = 1,
+    Shipped = 2
 }
 

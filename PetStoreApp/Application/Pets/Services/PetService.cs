@@ -1,23 +1,20 @@
-﻿using MediatR;
+﻿using PetStoreApp.Application.Orders.Services;
 using PetStoreApp.Application.Pets.Commands;
 using PetStoreApp.Domain.Models;
-using PetStoreApp.Infrastructure;
+using PetStoreApp.Infrastructure.Repositories.Pet;
 
 namespace PetStoreApp.Application.Pets.Services;
 public class PetService : IPetService
 {
-    private readonly IMediator _mediator;
-    private readonly IPetsReadWrite _petsReadWrite;
-
+    private readonly IPetRepository _petRepository;
     private readonly List<Pet> _pet = new();
-    public PetService(IPetsReadWrite petsReadWrite)
+    public PetService(IPetRepository petRepository)
     {
-        _petsReadWrite = petsReadWrite;
+        _petRepository = petRepository;
     }
     public List<Pet> GetPets()
     {
-        return _petsReadWrite.Read();
-        // return _pet;
+        return _petRepository.Read();
     }
     public async Task<Pet> AddPet(AddPetCommand request)
     {
@@ -29,20 +26,20 @@ public class PetService : IPetService
             PetStatus = PetStatus.Available,
         };
         _pet.Add(p);
-        await _petsReadWrite.Write(p);
+        await _petRepository.Write(p);
         return p;
     }
     public async Task<Pet> DeletePet(Pet pet)
     {
         var findPet = _pet.Find(x => x.PetId == pet.PetId);
-        await _petsReadWrite.Remove(pet);
+        await _petRepository.Remove(pet);
         return pet;
     }
     public async Task<Pet> EditPet(Pet pet, string petName)
     {
         var findPet = _pet.Find(x => x.PetId == pet.PetId);
         pet.PetName = petName;
-        await _petsReadWrite.Edit(pet, petName);
+        await _petRepository.Edit(pet, petName);
         return pet;
     }
 }

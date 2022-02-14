@@ -13,12 +13,10 @@ public class OrderService : IOrderService
     public OrderService(IOrderReadWrite orderReadWrite)
     {
         _orderReadWrite = orderReadWrite;
-        _order.Add(new Order {OrderId = 1, PetId = 1, Quantity = 1, ShipDate = "10/11/2021", OrderStatus = OrderStatus.Placed, Complete = true});
     }
     public List<Order> GetOrders()
     {
         return _orderReadWrite.Read();
-        // return _order;
     }
     public async Task<Order> CreateOrder(CreateOrderCommand request)
     {
@@ -35,11 +33,10 @@ public class OrderService : IOrderService
         await _orderReadWrite.Write(o);
         return o;
     }
-    public Order DeleteOrder(Order order)
+    public async Task<Order> DeleteOrder(Order order)
     {
-        var orders = GetOrders();
-        _order.Remove(order);
-        _orderReadWrite.Write(order);
+        var orders = GetOrders().Find(x => x.OrderId == order.OrderId);
+        await _orderReadWrite.Remove(order);
         return order;
     }
 }
