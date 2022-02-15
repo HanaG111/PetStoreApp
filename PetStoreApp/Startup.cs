@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using PetStoreApp.Application.Orders.Services;
 using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Application.Users.Services;
 using PetStoreApp.Infrastructure;
-using PetStoreApp.Infrastructure.Repositories.Pet;
+using PetStoreApp.Infrastructure.Repositories;
 
 namespace PetStoreApp;
     public class Startup
@@ -29,7 +30,7 @@ namespace PetStoreApp;
             services.AddSingleton<IPetService, PetService>();
             services.AddSingleton<IOrderService, OrderService>();
             services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<IPetRepository, PetRepository>();
+            services.AddScoped(typeof(IPetRepository <>), typeof(PetRepository<>));
             services.AddSingleton<IOrderReadWrite, OrderReadWrite>();
             services.AddSwaggerGen(c =>
             {
@@ -44,7 +45,6 @@ namespace PetStoreApp;
             {
                 app.UseDeveloperExceptionPage();
             }
-            
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             app.UseRouting();
