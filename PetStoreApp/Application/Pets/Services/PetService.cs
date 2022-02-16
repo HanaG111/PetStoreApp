@@ -1,14 +1,11 @@
-﻿using MediatR;
-using PetStoreApp.Application.Pets.Commands;
+﻿using PetStoreApp.Application.Pets.Commands;
 using PetStoreApp.Domain.Models;
-using PetStoreApp.Infrastructure.Repositories;
+using PetStoreApp.Infrastructure.Repositories.Pets;
 
 namespace PetStoreApp.Application.Pets.Services;
 public class PetService : IPetService
 {
-    private readonly IMediator _mediator;
     private readonly IPetRepository<Pet> _petRepository;
-
     private readonly List<Pet> _pet = new();
     public PetService(IPetRepository<Pet> petRepository)
     {
@@ -16,7 +13,7 @@ public class PetService : IPetService
     }
     public List<Pet> GetPets()
     {
-        return _petRepository.GetAllAsync();
+        return _petRepository.GetAllAsync<Pet>();
     }
     public async Task<Pet> AddPet(AddPetCommand request)
     {

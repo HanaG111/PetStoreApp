@@ -1,12 +1,16 @@
 ﻿using System.Text;
 using System.Text.Json;
+using PetStoreApp.Infrastructure.Repositories.Pets;
 
 namespace PetStoreApp.Infrastructure.Repositories.Files;
-
-public class FileRepository : IFileRepository
+public class FileRepository<T> : IFileRepository where T : class
 {
     private readonly IFileRepository _fileRepository;
-    private IPetRepository _petRepository;
+    private readonly IPetRepository<T> _petRepository;
+    public FileRepository(IPetRepository<T> petRepository)
+    {
+        _petRepository = petRepository;
+    }
     public async Task<List<T>> WriteToFile<T>(string fileName, List<T> list)
     {
         string json = JsonSerializer.Serialize(list);
@@ -31,7 +35,7 @@ public class FileRepository : IFileRepository
         {
             throw new Exception(e.Message);
         }
-        return list;
+        return await Task.FromResult(list);
     }
 }
 
