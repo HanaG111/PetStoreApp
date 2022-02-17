@@ -1,19 +1,22 @@
 ﻿using PetStoreApp.Application.Pets.Commands;
 using PetStoreApp.Domain.Models;
-using PetStoreApp.Infrastructure.Repositories.Pets;
+using PetStoreApp.Infrastructure.Repositories;
+using PetStoreApp.Domain.Constants;
 
 namespace PetStoreApp.Application.Pets.Services;
 public class PetService : IPetService
 {
-    private readonly IPetRepository<Pet> _petRepository;
+    private readonly IFileRepository<Pet> _fileRepository;
+    private readonly Files _files;
     private readonly List<Pet> _pet = new();
-    public PetService(IPetRepository<Pet> petRepository)
+    public PetService(IFileRepository<Pet> fileRepository, Files files)
     {
-        _petRepository = petRepository;
+        _fileRepository = fileRepository;
+        _files = files;
     }
     public List<Pet> GetPets()
     {
-        return _petRepository.GetAllAsync<Pet>();
+        return _fileRepository.GetAllAsync<Pet>(FileConstants.fileName).GetAwaiter().GetResult();
     }
     public async Task<Pet> AddPet(AddPetCommand request)
     {
@@ -25,20 +28,20 @@ public class PetService : IPetService
             PetStatus = PetStatus.Available,
         };
         _pet.Add(p);
-        await _petRepository.AddAsync(p);
+        await _fileRepository.AddAsync(p, FileConstants.fileName);
         return p;
     }
     public async Task<Pet> DeletePet(Pet pet)
     {
         var findPet = _pet.Find(x => x.PetId == pet.PetId);
-        await _petRepository.DeleteAsync(pet);
+        await _fileRepository.DeleteAsync(pet, FileConstants.fileName);
         return pet;
     }
     public async Task<Pet> EditPet(Pet pet, string petName)
     {
         var findPet = _pet.Find(x => x.PetId == pet.PetId);
         pet.PetName = petName;
-        await _petRepository.UpdateAsync(pet, petName);
+        await _fileRepository.UpdateAsync(pet, petName, FileConstants.fileName);
         return pet;
     }
 }

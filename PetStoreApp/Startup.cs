@@ -4,9 +4,8 @@ using Microsoft.OpenApi.Models;
 using PetStoreApp.Application.Orders.Services;
 using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Application.Users.Services;
-using PetStoreApp.Infrastructure;
-using PetStoreApp.Infrastructure.Repositories.Pets;
-using PetStoreApp.Infrastructure.Repositories.Files;
+using PetStoreApp.Domain.Models;
+using PetStoreApp.Infrastructure.Repositories;
 
 namespace PetStoreApp;
 public class Startup
@@ -29,9 +28,11 @@ public class Startup
         services.AddSingleton<IPetService, PetService>();
         services.AddSingleton<IOrderService, OrderService>();
         services.AddSingleton<IUserService, UserService>();
-        services.AddScoped(typeof(IFileRepository), typeof(FileRepository<>));
-        services.AddScoped(typeof(IPetRepository<>), typeof(PetRepository<>));
-        services.AddSingleton<IOrderReadWrite, OrderReadWrite>();
+        services.AddScoped(typeof(IFileRepository<>), typeof(FileRepository<>));
+        //services.AddScoped(typeof(IPetRepository<>), typeof(PetRepository<>));
+        services.AddSingleton<IFileRepository<Pet>, FileRepository<Pet>>(); 
+        //services.Add(new ServiceDescriptor(typeof(IFileRepository), typeof(FileRepository<>) , ServiceLifetime.Scoped));
+        //services.Add(new ServiceDescriptor(typeof(IPetRepository<>), typeof(PetRepository<>) , ServiceLifetime.Scoped));
         services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
     }
 
