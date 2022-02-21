@@ -1,28 +1,26 @@
-﻿using MediatR;
-using PetStoreApp.Application.Orders.Commands;
+﻿using PetStoreApp.Application.Orders.Commands;
+using PetStoreApp.Domain.Constants;
 using PetStoreApp.Domain.Models;
-using PetStoreApp.Infrastructure;
+using PetStoreApp.Infrastructure.Repositories;
 
 namespace PetStoreApp.Application.Orders.Services;
 public class OrderService : IOrderService
 {
-    private readonly IMediator _mediator;
-    private readonly IOrderReadWrite _orderReadWrite;
-
+    private readonly IFileRepository<Order> _fileRepository;
     private readonly List<Order> _order = new();
-    public OrderService(IOrderReadWrite orderReadWrite)
+    public OrderService(IFileRepository<Order> fileRepository)
     {
-        _orderReadWrite = orderReadWrite;
+        _fileRepository = fileRepository;
     }
     public List<Order> GetOrders()
     {
-        return _orderReadWrite.Read();
+        return _fileRepository.GetAllAsync(FileConstants.orderFile).GetAwaiter().GetResult();
     }
     public async Task<Order> CreateOrder(CreateOrderCommand request)
     {
         Order o = new()
         {
-            OrderId = _order.Max(x => x.OrderId) + 1,
+            OrderId = GetOrders().Max(x => x.OrderId) + 1,
             PetId = request.PetId,
             Quantity = request.Quantity,
             ShipDate = "21/10/2021",
@@ -30,13 +28,14 @@ public class OrderService : IOrderService
             Complete = true,
         };
         _order.Add(o);
-        await _orderReadWrite.Write(o);
+        await _fileRepository.AddAsync(o, FileConstants.orderFile);
         return o;
     }
     public async Task<Order> DeleteOrder(Order order)
     {
         var orders = GetOrders().Find(x => x.OrderId == order.OrderId);
-        await _orderReadWrite.Remove(order);
+        _order.Remove(order);
+        await _fileRepository.DeleteAsync(order, FileConstants.orderFile);
         return order;
     }
 }

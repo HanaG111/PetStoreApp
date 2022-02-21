@@ -4,17 +4,19 @@ using Microsoft.OpenApi.Models;
 using PetStoreApp.Application.Orders.Services;
 using PetStoreApp.Application.Pets.Services;
 using PetStoreApp.Application.Users.Services;
-using PetStoreApp.Domain.Models;
 using PetStoreApp.Infrastructure.Repositories;
 
 namespace PetStoreApp;
+
 public class Startup
 {
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
     }
+
     public IConfiguration Configuration { get; }
+
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
@@ -28,9 +30,10 @@ public class Startup
         services.AddSingleton<IPetService, PetService>();
         services.AddSingleton<IOrderService, OrderService>();
         services.AddSingleton<IUserService, UserService>();
-        services.AddScoped(typeof(IFileRepository<>), typeof(FileRepository<>));
-        //services.AddScoped(typeof(IPetRepository<>), typeof(PetRepository<>));
-        services.AddSingleton<IFileRepository<Pet>, FileRepository<Pet>>(); 
+        services.AddSingleton<IFiles, Files>();
+        services.AddSingleton(typeof(IFileRepository<>), typeof(FileRepository<>));
+        //services.AddTransient(typeof(IFileRepository<Pet>), typeof(IFileRepository<Pet>));
+        //services.AddSingleton<IFileRepository<Pet>, FileRepository<Pet>>();
         //services.Add(new ServiceDescriptor(typeof(IFileRepository), typeof(FileRepository<>) , ServiceLifetime.Scoped));
         //services.Add(new ServiceDescriptor(typeof(IPetRepository<>), typeof(PetRepository<>) , ServiceLifetime.Scoped));
         services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });

@@ -4,20 +4,22 @@ using PetStoreApp.Infrastructure.Repositories;
 using PetStoreApp.Domain.Constants;
 
 namespace PetStoreApp.Application.Pets.Services;
+
 public class PetService : IPetService
 {
     private readonly IFileRepository<Pet> _fileRepository;
-    private readonly Files _files;
     private readonly List<Pet> _pet = new();
-    public PetService(IFileRepository<Pet> fileRepository, Files files)
+
+    public PetService(IFileRepository<Pet> fileRepository)
     {
         _fileRepository = fileRepository;
-        _files = files;
     }
+
     public List<Pet> GetPets()
     {
-        return _fileRepository.GetAllAsync<Pet>(FileConstants.fileName).GetAwaiter().GetResult();
+        return _fileRepository.GetAllAsync(FileConstants.fileName).GetAwaiter().GetResult();
     }
+
     public async Task<Pet> AddPet(AddPetCommand request)
     {
         Pet p = new()
@@ -31,12 +33,15 @@ public class PetService : IPetService
         await _fileRepository.AddAsync(p, FileConstants.fileName);
         return p;
     }
+
     public async Task<Pet> DeletePet(Pet pet)
     {
         var findPet = _pet.Find(x => x.PetId == pet.PetId);
+        _pet.Remove(findPet);
         await _fileRepository.DeleteAsync(pet, FileConstants.fileName);
         return pet;
     }
+
     public async Task<Pet> EditPet(Pet pet, string petName)
     {
         var findPet = _pet.Find(x => x.PetId == pet.PetId);

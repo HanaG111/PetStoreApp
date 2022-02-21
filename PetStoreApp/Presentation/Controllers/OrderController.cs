@@ -24,7 +24,7 @@ public class OrderController : BaseController
     }
 
     [HttpPost(template: "createOrder")]
-    public async Task<ActionResult<Order>> Create([FromBody]OrderDto orderDto)
+    public async Task<ActionResult<Order>> Create([FromBody] OrderDto orderDto)
     {
         try
         {

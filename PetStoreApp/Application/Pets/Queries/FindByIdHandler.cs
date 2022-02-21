@@ -3,6 +3,7 @@ using MediatR;
 using PetStoreApp.Application.Pets.Services;
 
 namespace PetStoreApp.Application.Pets.Queries;
+
 public class FindByIdHandler : IRequestHandler<FindByIdQuery, Pet>
 {
     private readonly IPetService _petService;
@@ -15,11 +16,11 @@ public class FindByIdHandler : IRequestHandler<FindByIdQuery, Pet>
     public async Task<Pet> Handle(FindByIdQuery request, CancellationToken cancellationToken)
     {
         var pet = _petService.GetPets().FirstOrDefault(x => x.PetId == request.PetId);
-
         if (pet == null)
         {
             throw new ApplicationException("No Pet");
         }
+
         return await Task.FromResult(pet);
     }
 }

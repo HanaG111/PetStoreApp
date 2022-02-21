@@ -16,7 +16,6 @@ public class FindByIdHandler : IRequestHandler<FindByIdQuery, Order>
     public async Task<Order> Handle(FindByIdQuery request, CancellationToken cancellationToken)
     {
         var order = _orderService.GetOrders().FirstOrDefault(x => x.OrderId == request.OrderId);
-
         if (order == null)
         {
             throw new ApplicationException("No Order with this Id");

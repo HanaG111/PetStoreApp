@@ -6,16 +6,13 @@ namespace PetStoreApp.Application.Orders.Queries;
 public class FindByStatusHandler : IRequestHandler<FindByStatusQuery, Order>
 {
     private readonly IOrderService _orderService;
-    
     public FindByStatusHandler(IOrderService orderService)
     {
         _orderService = orderService;
     }
-    
     public async Task<Order> Handle(FindByStatusQuery request, CancellationToken cancellationToken)
     {
         var order = _orderService.GetOrders().FirstOrDefault(x => x.OrderStatus == request.OrderStatus);
-
         if (order == null)
         {
             throw new ApplicationException("This status does not exist");

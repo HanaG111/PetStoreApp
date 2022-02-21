@@ -6,8 +6,6 @@ public class EditPetCommand : IRequest<Pet>
 {
     public int PetId { get; set; }
     public string PetName { get; set; }
-    
     public PetStatus PetStatus { get; set; }
     public Category Category { get; set; }
-    
 }

@@ -7,6 +7,7 @@ namespace PetStoreApp.Application.Pets.Commands;
 public class AddPetHandler : IRequestHandler<AddPetCommand, Pet>
 {
     private readonly IPetService _petService;
+
     public AddPetHandler(IPetService petService)
     {
         _petService = petService;

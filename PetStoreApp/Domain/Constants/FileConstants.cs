@@ -2,5 +2,6 @@
 
 public class FileConstants
 {
-    public const string fileName = "Pets";
+    public static string fileName = "Pets";
+    public static string orderFile = "Orders";
 }

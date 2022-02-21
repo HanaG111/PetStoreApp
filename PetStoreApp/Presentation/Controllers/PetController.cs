@@ -22,7 +22,7 @@ public class PetController : BaseController
     {
         return await _mediator.Send(new GetPetListQuery());
     }
-    
+
     [HttpGet("petStatus/{petStatus}")]
     public async Task<IActionResult> FindByStatus(string petStatus)
     {
@@ -54,9 +54,9 @@ public class PetController : BaseController
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpPost(template: "addPet")]
-    public async Task<ActionResult<Pet>> AddPet([FromBody]PetDto petDto)
+    public async Task<ActionResult<Pet>> AddPet([FromBody] PetDto petDto)
     {
         try
         {
@@ -74,7 +74,6 @@ public class PetController : BaseController
     }
 
     [HttpDelete("delete/{petId}")]
-
     public async Task<IActionResult> DeletePet(int petId)
     {
         try
@@ -89,9 +88,9 @@ public class PetController : BaseController
             return BadRequest(e.Message);
         }
     }
-    
+
     [HttpPut("editPet/{petId}")]
-    public async Task<ActionResult<Pet>> EditPet(int petId,[FromBody]PetDto petDto)
+    public async Task<ActionResult<Pet>> EditPet(int petId, [FromBody] PetDto petDto)
     {
         try
         {
