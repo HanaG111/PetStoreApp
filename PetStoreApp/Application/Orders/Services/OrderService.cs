@@ -14,7 +14,7 @@ public class OrderService : IOrderService
     }
     public List<Order> GetOrders()
     {
-        return _fileRepository.GetAllAsync(FileConstants.orderFile).GetAwaiter().GetResult();
+        return await _fileRepository.GetAllAsync(FileConstants.orderFile);
     }
     public async Task<Order> CreateOrder(CreateOrderCommand request)
     {

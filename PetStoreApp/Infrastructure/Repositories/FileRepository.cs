@@ -1,12 +1,26 @@
-﻿namespace PetStoreApp.Infrastructure.Repositories;
+﻿using PetStoreApp.Domain.Factories;
+
+namespace PetStoreApp.Infrastructure.Repositories;
 
 public class FileRepository<T> : IFileRepository<T> where T : class
 {
     private readonly IFiles _files;
+    private string fileName;
+    private string setFile;
+    private readonly PetFactory _petFactory;
 
-    public FileRepository(IFiles files)
+
+    public FileRepository(IFiles files, PetFactory petFactory, string setFile)
     {
         _files = files;
+        _petFactory = petFactory;
+        this.setFile = setFile;
+    }
+
+    public FileRepository<T> SetFile(string fileName)
+    {
+        this.setFile = setFile;
+        return this;
     }
 
     public async Task<T> AddAsync(T entity, string fileName)
@@ -34,21 +48,7 @@ public class FileRepository<T> : IFileRepository<T> where T : class
 
     public async Task<List<T>> UpdateAsync(T entity, string entity2, string fileName)
     {
-        List<T> list = new List<T>();
-        list = await GetAllAsync(fileName);
-        try
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
-
-            // list.Find(x => x.entity == entity);
-            return await _files.WriteToTextFile(fileName, list);
-        }
-        catch (Exception e)
-        {
-            throw new Exception(e.Message);
-        }
+        return await _files.WriteToTextFile<T>(fileName, list);
     }
 }
+

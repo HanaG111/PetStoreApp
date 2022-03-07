@@ -16,7 +16,7 @@ public class FindByStatusHandler : IRequestHandler<FindByStatusQuery, Pet>
     public async Task<Pet> Handle(FindByStatusQuery request, CancellationToken cancellationToken)
     {
         var pet = _petService.GetPets().Find(x => x.PetStatus == request.PetStatus);
-        if (pet.PetStatus != PetStatus.Available)
+        if (pet.PetStatus != PetStatus.Available || pet.PetStatus != PetStatus.Pending  || pet.PetStatus != PetStatus.Sold)
         {
             throw new ApplicationException("This status does not exist");
         }

@@ -2,6 +2,7 @@
 
 public interface IFileRepository<T> where T : class
 {
+    FileRepository<T> SetFile(string fileName);
     Task<List<T>> GetAllAsync(string fileName);
     Task<T> AddAsync(T entity, string fileName);
     Task<List<T>> UpdateAsync(T entity, string entity2, string fileName);
